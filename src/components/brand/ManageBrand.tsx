@@ -56,6 +56,12 @@ const ManageBrand: React.FC = () => {
 
     const columns = [
         {
+            title: "Image",
+            dataIndex: "ImageSource",
+            key: "ImageSource",
+            render: (text: string) => <img src={text} alt="brand logo" className="w-10 h-10" />,
+        },
+        {
             title: "Brand Name",
             dataIndex: "BrandName",
             key: "BrandName",
@@ -65,12 +71,7 @@ const ManageBrand: React.FC = () => {
             dataIndex: "Description",
             key: "Description",
         },
-        {
-            title: "Image",
-            dataIndex: "ImageSource",
-            key: "ImageSource",
-            render: (text: string) => <img src={text} alt="brand logo" className="w-10 h-10" />,
-        },
+        
         {
             title: "Edit",
             key: "edit",
@@ -109,7 +110,7 @@ const ManageBrand: React.FC = () => {
             
             <div className="flex justify-between items-center w-full mb-6">
                 <Input placeholder="Search by brand name" prefix={<SearchIcon />} className="w-2/3" />
-                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold" onClick={() => setIsAddModalVisible(true)}>
+                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg" onClick={() => setIsAddModalVisible(true)}>
                     Add new Brand
                 </Button>
             </div>
@@ -119,7 +120,8 @@ const ManageBrand: React.FC = () => {
                 columns={columns}
                 rowKey="Id"
                 pagination={{ pageSize: 10 }}
-                className="min-w-full"
+                className="min-w-full shadow-lg"
+                bordered
             />
 
             <Modal

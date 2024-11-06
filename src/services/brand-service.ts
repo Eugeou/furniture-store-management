@@ -4,7 +4,8 @@ import { Brand, CreatedBrand } from "@/types/entities/brand-entity";
 import { ParseJSON } from "@/configs/parseJSON";
 
 const BrandUrl = envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand";
-const accessToken = localStorage.getItem("access_token");
+const getAccessToken = () => (typeof window !== "undefined" ? localStorage.getItem("access_token") : null);
+const accessToken = getAccessToken();
 
 export const CreateBrand = async (brand: CreatedBrand) => {
     
