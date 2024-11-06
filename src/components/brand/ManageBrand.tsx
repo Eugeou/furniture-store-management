@@ -2,19 +2,28 @@
 
 import React, { useState } from "react";
 import useSWR from "swr";
-import { Table, Button, Modal, Form, Input, Upload } from "antd";
+import { Table, Button, Modal, Form, Input, Upload, Tag } from "antd";
 import { toast } from "react-toastify";
 import { BookmarkPlus, Pen, Tags, Trash, SearchIcon } from "lucide-react";
 import { Brand } from "@/types/entities/brand-entity";
 import { CreateBrand, DeleteBrand, EditBrand, GetAllBrand } from "@/services/brand-service";
 import envConfig from "@/configs/config";
+import useDebounce from "@/hooks/useDebounce";
 
 const ManageBrand: React.FC = () => {
     const { data: brands , mutate } = useSWR(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand", GetAllBrand, { fallbackData: [] });
     const [form] = Form.useForm();
+
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [editingBrand, setEditingBrand] = useState<Brand | null>(null);
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+    const filteredBrands = (brands as any).data?.filter((brand: { BrandName: string; }) =>
+        brand.BrandName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+    );
 
     const handleAddBrand = async () => {
         try {
@@ -56,15 +65,18 @@ const ManageBrand: React.FC = () => {
 
     const columns = [
         {
-            title: "Image",
+            title: "Brand Image",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text} alt="brand logo" className="w-10 h-10" />,
+            render: (text: string) => <img src={text ? text : "/faq.png"} alt="brand logo" className="w-10 h-10" />,
         },
         {
             title: "Brand Name",
-            dataIndex: "BrandName",
+            // dataIndex: "BrandName",
             key: "BrandName",
+            render: (_: any, record: Brand) => (
+                <Tag color="blue">{record.BrandName}</Tag>
+            ),
         },
         {
             title: "Description",
@@ -73,7 +85,7 @@ const ManageBrand: React.FC = () => {
         },
         
         {
-            title: "Edit",
+            title: "Edit Brand",
             key: "edit",
             render: (_: any, record: Brand) => (
                 <Button
@@ -103,41 +115,46 @@ const ManageBrand: React.FC = () => {
         },
     ];
 
-    console.log(brands);
+    //console.log(brands);
 
     return (
         <div>
             
-            <div className="flex justify-between items-center w-full mb-6">
-                <Input placeholder="Search by brand name" prefix={<SearchIcon />} className="w-2/3" />
-                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg" onClick={() => setIsAddModalVisible(true)}>
+            <div className="flex justify-between items-center w-full mb-8">
+                <Input 
+                    placeholder="Search by brand name" 
+                    prefix={<SearchIcon />} 
+                    className="w-2/3 h-10 border border-gray-300 rounded-lg shadow-lg" 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}/>
+                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg h-10" onClick={() => setIsAddModalVisible(true)}>
                     Add new Brand
                 </Button>
             </div>
 
             <Table
-                dataSource={(brands as any).data as Brand[]} 
+                dataSource={filteredBrands} 
                 columns={columns}
                 rowKey="Id"
                 pagination={{ pageSize: 10 }}
-                className="min-w-full shadow-lg"
+                className="min-w-full shadow-lg border border-gray-300 rounded-lg text-xl font-semibold"
                 bordered
             />
 
             <Modal
-                title={<div className="flex justify-center items-center space-x-2"><Tags /> Add new Brand</div>}
+                title={<div className="flex justify-center items-center space-x-2"><Tags /> <p className="font-semibold text-xl">Add New Brand</p></div>}
                 open={isAddModalVisible}
                 onOk={handleAddBrand}
                 onCancel={() => setIsAddModalVisible(false)}
             >
                 <Form form={form} layout="vertical">
-                    <Form.Item name="BrandName" label="Name" rules={[{ required: true }]}>
+                    <Form.Item name="BrandName" label={<p className='font-semibold text-sm'>Brand Name</p>} rules={[{ required: true }]}>
                         <Input placeholder="Enter brand name" />
                     </Form.Item>
-                    <Form.Item name="Description" label="Description">
+                    <Form.Item name="Description" label={<p className='font-semibold text-sm'>Description</p>}>
                         <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
-                    <Form.Item name="ImageSource" label="Image">
+                    <Form.Item name="ImageSource" label={<p className='font-semibold text-sm'>Brand Image</p>}>
                         <Upload beforeUpload={(file) => { form.setFieldsValue({ ImageSource: file }); return false; }}>
                             <Button>Upload Image</Button>
                         </Upload>
@@ -146,19 +163,19 @@ const ManageBrand: React.FC = () => {
             </Modal>
 
             <Modal
-                title={<><Tags /> Edit Brand</>}
+                title={<div className="flex justify-center items-center space-x-2"><Tags /> <p className="font-semibold text-xl">Edit Brand</p></div>}
                 open={isEditModalVisible}
                 onOk={handleEditBrand}
                 onCancel={() => setIsEditModalVisible(false)}
             >
                 <Form form={form} layout="vertical">
-                    <Form.Item name="BrandName" label="Name" rules={[{ required: true }]}>
+                    <Form.Item name="BrandName" label={<p className='font-semibold text-sm'>Brand Name</p>} rules={[{ required: true }]}>
                         <Input placeholder="Enter brand name" />
                     </Form.Item>
-                    <Form.Item name="Description" label="Description">
+                    <Form.Item name="Description" label={<p className='font-semibold text-sm'>Description</p>}>
                         <Input.TextArea placeholder="Enter description" />
                     </Form.Item>
-                    <Form.Item name="ImageSource" label="Image">
+                    <Form.Item name="ImageSource" label={<p className='font-semibold text-sm'>Brand Image</p>}>
                         <Upload beforeUpload={(file) => { form.setFieldsValue({ ImageSource: file }); return false; }}>
                             <Button>Upload Image</Button>
                         </Upload>
