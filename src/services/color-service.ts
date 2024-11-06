@@ -67,8 +67,6 @@ export const DeleteColor = async (colorId: string): Promise<void> => {
     if (!accessToken) {
         throw new Error('No access token found');
     }
-
-    
     
     const config = {
         method: 'delete',
