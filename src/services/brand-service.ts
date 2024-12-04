@@ -2,18 +2,14 @@ import axios, { AxiosResponse } from "axios";
 import envConfig from "@/configs/config";
 import { Brand, CreatedBrand } from "@/types/entities/brand-entity";
 import { ParseJSON } from "@/configs/parseJSON";
+import axiosClient from "@/lib/axios";
 
 const BrandUrl = envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand";
-const getAccessToken = () => (typeof window !== "undefined" ? localStorage.getItem("access_token") : null);
-const accessToken = getAccessToken();
+
+const accessToken = localStorage.getItem("accessToken");
 
 export const CreateBrand = async (brand: CreatedBrand) => {
     
-
-    if (!accessToken) {
-        throw new Error("No access token found");
-    }
-
     const formData = new FormData();
     formData.append("BrandName", brand.BrandName);
     formData.append("Description", brand.Description);
@@ -23,7 +19,7 @@ export const CreateBrand = async (brand: CreatedBrand) => {
         method: "post",
         url: BrandUrl,
         headers: {
-            "Authorization": `Bearer ${ParseJSON(accessToken)}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "multipart/form-data",
         },
         data: formData,
@@ -38,57 +34,38 @@ export const CreateBrand = async (brand: CreatedBrand) => {
     }
 };
 
+
 export const GetAllBrand = async (): Promise<Brand[]> => {
-
-    if (!accessToken) {
-        throw new Error('No access token found');
-    }
-
-    const parseToken = ParseJSON(accessToken);
-    
-    try {
-        const config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: BrandUrl,
-            headers: {
-              "Authorization": `Bearer ${parseToken}`,
-            }
-          };
-        
-          const response: AxiosResponse<Brand[]> = await axios.request(config);
-          return response.data;
-    } catch (error) {
-        console.error(error);
-        throw new Error('Get all branch failed');
-    }
+    const { data } = await axiosClient.get("/brand");
+    return data;
 };
+
+
+
+// export const DeleteBrand = async (id: string) => {
+
+//     const DeleteURL = envConfig.NEXT_PUBLIC_API_ENDPOINT + `/brand/${id}`;
+
+//     const config = {
+//         method: "delete",
+//         maxBodyLength: Infinity,
+//         url: DeleteURL,
+//         headers: {
+//             "Authorization": `Bearer ${accessToken}`,
+//         },
+//     };
+//     try {
+//         const response = await axios.request(config);
+//         return response.data;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
 export const DeleteBrand = async (id: string) => {
-
-    const DeleteURL = envConfig.NEXT_PUBLIC_API_ENDPOINT + `/brand/${id}`;
-
-    if (!accessToken) {
-        throw new Error("No access token found");
-    }
-
-    const parseToken = ParseJSON(accessToken);
-
-    const config = {
-        method: "delete",
-        maxBodyLength: Infinity,
-        url: DeleteURL,
-        headers: {
-            "Authorization": `Bearer ${parseToken}`,
-        },
-    };
-    try {
-        const response = await axios.request(config);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
+    return await axiosClient.delete(`/brand/${id}`);
 };
+
 
 // export const EditBrand = async (id: string, brandName: string, description: string, image: string) => {
 
@@ -120,11 +97,6 @@ export const DeleteBrand = async (id: string) => {
 
 export const EditBrand = async ( id: string, brand: CreatedBrand) => {
     const EditBranchUrl = envConfig.NEXT_PUBLIC_API_ENDPOINT + `/brand/${id}`;
-
-    if (!accessToken) {
-        throw new Error("No access token found");
-    }
-
     const formData = new FormData();
     formData.append("Name", brand.BrandName);
     formData.append("Description", brand.Description);
@@ -134,7 +106,7 @@ export const EditBrand = async ( id: string, brand: CreatedBrand) => {
         method: "put",
         url: EditBranchUrl,
         headers: {
-            "Authorization": `Bearer ${ParseJSON(accessToken)}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "multipart/form-data",
         },
         data: formData,

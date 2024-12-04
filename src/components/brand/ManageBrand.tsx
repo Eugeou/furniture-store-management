@@ -11,7 +11,7 @@ import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
 
 const ManageBrand: React.FC = () => {
-    const { data: brands , mutate } = useSWR(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand", GetAllBrand, { fallbackData: [] });
+    const { data: brands , mutate } = useSWR<Brand[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand", GetAllBrand, { fallbackData: [] });
     const [form] = Form.useForm();
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -21,9 +21,12 @@ const ManageBrand: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-    const filteredBrands = (brands as any).data?.filter((brand: { BrandName: string; }) =>
+    const filteredBrands = (brands ?? []).filter((brand: { BrandName: string; }) =>
         brand.BrandName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
+
+
+    //console.log(localStorage.getItem("accessToken"), 'user id', localStorage.getItem("userId"));
 
     const handleAddBrand = async () => {
         try {
