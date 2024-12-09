@@ -1,27 +1,6 @@
 import { RoomSpace, CreatedRoomSpace } from "@/types/entities/roomspace-entity";
 import axiosClient from "@/lib/axios";
 
-// export const CreateBrand = async (brand: CreatedBrand) => {
-//     const formData = new FormData();
-//     formData.append("BrandName", brand.BrandName);
-//     formData.append("Description", brand.Description);
-//     formData.append("ImageSource", brand.ImageSource);
-
-//     const config = {
-//         headers: {
-//             "Content-Type": "multipart/form-data",
-//         },
-//     };
-
-//     try {
-//         const response = await axiosClient.post("/brand", formData, config);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Add branch failed:", error);
-//         throw error;
-//     }
-// };
-
 export const CreateRoomSpace = async (roomspace: CreatedRoomSpace) => {
     const formData = new FormData();
     formData.append("RoomSpaceName", roomspace.RoomSpaceName);

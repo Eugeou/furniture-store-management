@@ -3,7 +3,7 @@ import React from "react";
 import { Tags } from "lucide-react";
 import dynamic from "next/dynamic";
 
-const ManageBrand = dynamic(() => import("@/components/brand/ManageBrand"), {
+const ManageBrand = dynamic(() => import("@/components/ui-components/brand/ManageBrand"), {
   ssr: false,
 });
 

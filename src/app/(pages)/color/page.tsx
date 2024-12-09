@@ -4,7 +4,7 @@ import { BgColorsOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 
 //Dynamic import ManageColor component
-const ManageColor = dynamic(() => import('@/components/color/ManageColor'), {
+const ManageColor = dynamic(() => import('@/components/ui-components/color/ManageColor'), {
     ssr: false,
 });
 

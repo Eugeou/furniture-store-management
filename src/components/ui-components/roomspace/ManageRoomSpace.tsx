@@ -166,20 +166,23 @@ const ManageRoomSpace: React.FC = () => {
                         </Upload>
                     </Form.Item> */}
 
-                    <Upload
-                        listType="picture-card"
-                        maxCount={1}
-                        beforeUpload={() => false} // Ngăn việc upload tự động
-                        onChange={({ fileList }) => {
-                            if (fileList.length > 0) {
-                                form.setFieldsValue({ ImageSource: fileList[0]?.originFileObj }); // Lưu file gốc
-                            } else {
-                                form.setFieldsValue({ ImageSource: null }); // Xóa nếu không có file
-                            }
-                        }}
-                    >
-                        <Button icon={<UploadIcon />}></Button>
-                    </Upload>
+
+                    <Form.Item name="ImageSource" label={<p className='font-semibold text-sm'>RoomSpace Image</p>}>
+                        <Upload
+                            listType="picture-card"
+                            maxCount={1}
+                            beforeUpload={() => false} // Ngăn việc upload tự động
+                            onChange={({ fileList }) => {
+                                if (fileList.length > 0) {
+                                    form.setFieldsValue({ ImageSource: fileList[0]?.originFileObj }); // Lưu file gốc
+                                } else {
+                                    form.setFieldsValue({ ImageSource: null }); // Xóa nếu không có file
+                                }
+                            }}
+                        >
+                            <Button icon={<UploadIcon />}></Button>
+                        </Upload>
+                    </Form.Item>
                 </Form>
             </Modal>
 

@@ -4,7 +4,7 @@ import { Blocks } from "lucide-react";
 import dynamic from "next/dynamic";
 
 
-const ManageMaterial = dynamic(() => import("@/components/material/ManageMaterial"), {
+const ManageMaterial = dynamic(() => import("@/components/ui-components/material/ManageMaterial"), {
   ssr: false,
 });
 
