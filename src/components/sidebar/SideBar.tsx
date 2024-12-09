@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Calendar, FileText, Users, UserPlus, File, Lock, Wand, MessageSquare, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Menu, Package, PencilRuler, PackageOpen, TicketPercent, CalendarHeart, BookUser, Scroll, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions } from 'lucide-react';
+import { Calendar, FileText, Users, UserPlus, File, Lock, Wand, MessageSquare, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Menu, Package, PencilRuler, PackageOpen, TicketPercent, CalendarHeart, BookUser, Scroll, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles } from 'lucide-react';
 import { LayoutDashboardIcon } from 'lucide-react';
 import { Tags, PersonStanding, Slack } from 'lucide-react';
 import { BgColorsOutlined, OrderedListOutlined } from '@ant-design/icons';
@@ -129,6 +129,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
                   <Blocks className="mr-2" />
                   <Link href="/material">Materials</Link>
+                </li>
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                  <WandSparkles className="mr-2" />
+                  <Link href="/designer">Designer</Link>
                 </li>
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
                   <PackageOpen className="mr-2" />
