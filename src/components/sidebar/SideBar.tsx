@@ -68,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               <li className="p-4 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('category')}>
                 <div className="flex items-center cursor-pointer">
                   <Slack className="mr-2" />
-                  {!isCollapsed && 'Category'}
+                  {!isCollapsed && 'Furniture type'}
                 </div>
                 {!isCollapsed && (
                   <div className={`transform transition-transform duration-300 ${openDropdown === 'category' ? 'rotate-180' : 'rotate-0'}`}>
@@ -88,7 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 </li>
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
                   <PersonStanding className="mr-2" />
-                  <Link href="/gender">Genders</Link>
+                  <Link href="/roomspace">Room Space</Link>
                 </li>
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
                   <Slack className="mr-2" />
