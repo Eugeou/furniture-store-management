@@ -25,6 +25,21 @@ const ManageBrand: React.FC = () => {
         brand.BrandName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
+    // const Loops = async () => {
+    //     const data = await GetAllBrand();
+    //     data.map(async (item) => {
+    //         await DeleteBrand(item.Id);
+    //     });
+
+    //     data.forEach(async (item) => {
+    //         await DeleteBrand(item.Id);
+    //     });
+        
+    // }
+
+    // filteredBrands.map(async (item) => {
+    //     await DeleteBrand(item.Id);
+    // });
 
     //console.log(localStorage.getItem("accessToken"), 'user id', localStorage.getItem("userId"));
 
@@ -209,3 +224,4 @@ const ManageBrand: React.FC = () => {
 };
 
 export default ManageBrand;
+

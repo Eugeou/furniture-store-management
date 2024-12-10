@@ -3,18 +3,32 @@ export type StoreLogin = {
     password: string
 }
 
-  export type StoreToken = {
+export type StoreToken = {
     AccessToken: string
     RefreshToken: string
 }
 
+export type StoreUser = {
+    AccessToken: string
+    RefreshToken: string
+    UserId: string
+}
+
 export type UserProps = {
-    id: string;
-    fullName: string;
-    phone: string;
-    email: string;
-    password: string;
-    role: string;
-    enabled: boolean;
-    image: string | null;
+    Id: string;
+    FullName: string;
+    DateOfBirth: string;
+    Role: string;
+    UserName: string;
+    NormalizedUserName: string;
+    Email: string;
+    EmailConfirmed: boolean;
+    PhoneNumber: string;
+    PhoneNumberConfirmed: boolean;
+    TwoFactorEnabled: boolean;
+    LockoutEnabled: boolean;
+    AccessFailedCount: number;
+    SecurityStamp: string;
+    
+   // password: string;
 }
