@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { Table, Button, Modal, Form, Input } from 'antd';
-import { BookmarkPlus, Tags, Trash, SearchIcon, Pen, PaintBucket } from 'lucide-react';
+import { BookmarkPlus, Trash, SearchIcon, Pen, PaintBucket } from 'lucide-react';
 import { SketchPicker } from 'react-color';
 import { Colors } from '@/types/entities/color-entity';
 import { toast } from 'react-toastify';
@@ -12,7 +12,7 @@ import envConfig from '@/configs/config';
 import useDebounce from '@/hooks/useDebounce';
 
 const ManageColor: React.FC = () => {
-  const { data: colors, mutate } = useSWR(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/color', GetAllColors, { fallbackData: [] });
+  const { data: colors, mutate } = useSWR<Colors[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/color', GetAllColors, { fallbackData: [] });
   const [form] = Form.useForm();
 
   const [visible, setVisible] = useState(false);
@@ -23,7 +23,7 @@ const ManageColor: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const filteredColors = (colors as any).data?.filter((color: { ColorName: string; }) =>
+  const filteredColors = (colors ?? [])?.filter((color: { ColorName: string; }) =>
     color.ColorName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
 
@@ -112,7 +112,7 @@ const ManageColor: React.FC = () => {
     {
       title: 'Actions',
       key: 'action',
-      render: (_: any, record: Colors) => (
+      render: (_: unknown, record: Colors) => (
         <div className="flex flex-row space-x-3">
           <Button icon={<Pen />} onClick={() => handleOpenEditModal(record)}>
             Edit

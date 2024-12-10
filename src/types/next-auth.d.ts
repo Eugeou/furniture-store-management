@@ -1,4 +1,4 @@
-import NextAuth, { DefaultSession } from "next-auth";
+import { DefaultSession } from "next-auth";
 import { StoreUser } from "./entities/user.entity";
 
 declare module "next-auth" {

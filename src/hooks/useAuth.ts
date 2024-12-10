@@ -43,7 +43,7 @@ export function useAuth() {
     if (token.AccessToken) {
       dispatch(getUser())
     }
-  }, [token?.AccessToken])
+  }, [token?.AccessToken, dispatch])
 
   // Login function
   const onLogin = async <T>( paramLogin: StoreLogin, callbackSuccess?: (response?: T) => void) => {
@@ -66,9 +66,9 @@ export function useAuth() {
       console.log(token)
       callbackSuccess?.()
       navigate('/brand')
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.log(err)
-      toast.error(err?.response?.data?.message || err?.message)
+      //toast.error(err?.response?.data?.message || err?.message)
     } finally {
       stopLoading()
     }

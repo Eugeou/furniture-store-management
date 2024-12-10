@@ -1,11 +1,11 @@
 "use client";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "../globals.css";
 // import Navbar from "@/src/components/Navbar";
 import Sidebar from "@/components/sidebar/SideBar";
 import { useSidebarState } from "@/hooks/useTransitions";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 
 export default function PageLayout({

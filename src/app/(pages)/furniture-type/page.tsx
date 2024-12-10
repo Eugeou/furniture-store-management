@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Sofa, Tags } from "lucide-react";
+import { Sofa } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const ManageFurniType = dynamic(() => import("@/components/ui-components/furniture-type/ManageFurniType"), {

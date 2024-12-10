@@ -9,6 +9,7 @@ import { Designer } from "@/types/entities/designer-entity";
 import { CreateDesigner, DeleteDesigner, EditDesigner, GetAllDesigner } from "@/services/designer-service";
 import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
+import Image from "next/image";
 
 const ManageDesigner: React.FC = () => {
     const { data: Designers , mutate } = useSWR<Designer[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/designer", GetAllDesigner, { fallbackData: [] });
@@ -37,7 +38,7 @@ const ManageDesigner: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error adding Designer");
+            toast.error("Error adding Designer " + error);
         }
     };
 
@@ -52,7 +53,7 @@ const ManageDesigner: React.FC = () => {
             toast.success("Updated Designer information successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error while updating Designer information");
+            toast.error("Error while updating Designer information " + error);
         }
     };
 
@@ -62,7 +63,7 @@ const ManageDesigner: React.FC = () => {
             mutate(); 
             toast.success("Designer information deleted successfully");
         } catch (error) {
-            toast.error("Error deleting Designer information");
+            toast.error("Error deleting Designer information " + error);
         }
     };
 
@@ -71,13 +72,13 @@ const ManageDesigner: React.FC = () => {
             title: "Designer Avatar",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text ? text : "/faq.png"} alt="Designer logo" className="w-10 h-10" />,
+            render: (text: string) => <Image src={text ? text : "/faq.png"} alt="Designer logo" width={40} height={40}/>,
         },
         {
             title: "Designer Name",
             // dataIndex: "DesignerName",
             key: "DesignerName",
-            render: (_: any, record: Designer) => (
+            render: (_: unknown, record: Designer) => (
                 <Tag color="blue">{record.DesignerName}</Tag>
             ),
         },
@@ -90,7 +91,7 @@ const ManageDesigner: React.FC = () => {
         {
             title: "Edit Designer info",
             key: "edit",
-            render: (_: any, record: Designer) => (
+            render: (_: unknown, record: Designer) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -106,7 +107,7 @@ const ManageDesigner: React.FC = () => {
         {
             title: "Delete Designer info",
             key: "delete",
-            render: (_: any, record: Designer) => (
+            render: (_: unknown, record: Designer) => (
                 <Button
                     icon={<Trash />}
                     danger

@@ -20,8 +20,9 @@ const initialState: AuthState = {
 export const getUser = createAsyncThunk('user/getUser', async (_param: string | undefined, { rejectWithValue }) => {
   try {
     return await GetMe()
-  } catch (error: any) {
-    return rejectWithValue(error?.response?.data?.message || error.message)
+  } catch (error) {
+    return rejectWithValue(error) 
+    //error?.response?.data?.message || error.message
   }
 })
 

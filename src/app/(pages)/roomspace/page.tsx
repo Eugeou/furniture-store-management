@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Proportions, Tags } from "lucide-react";
+import { Proportions } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const ManageRoomSpace = dynamic(() => import("@/components/ui-components/roomspace/ManageRoomSpace"), {

@@ -1,11 +1,11 @@
 "use client";
 
-import { login } from "@/services/auth-service";
+// import { login } from "@/services/auth-service";
 import { StoreLogin, UserProps } from "@/types/entities/auth-entity";
-import { AxiosError } from "axios";
+// import { AxiosError } from "axios";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+//import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 interface UseSessionAuth {
   user?: UserProps;
@@ -18,7 +18,7 @@ interface UseSessionAuth {
 const useSessionAuth = (onLoginSuccess?: () => void): UseSessionAuth => {
 
   const { data: session, status } = useSession();
-  const router = useRouter();
+  //const router = useRouter();
 
   const onLogout = useCallback(async () => {
     await signOut({
@@ -43,12 +43,12 @@ const useSessionAuth = (onLoginSuccess?: () => void): UseSessionAuth => {
 
       console.log(result);
       onLoginSuccess?.();
-    } catch (error: AxiosError | any) {
+    } catch (error : Error | any) {
     
       console.log("Internal error during login:", error);
-      return error.error || "Unknown error occurred";
+      return error.message || "Unknown error occurred";
     }
-  }, []);
+  }, [ onLoginSuccess ]);
 
   return {
     user: session?.user,

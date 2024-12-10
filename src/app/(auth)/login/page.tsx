@@ -2,19 +2,20 @@
 
 import AppLoading from '@/components/shared/app-loading/AppLoading';
 
-import { useAuth } from '@/hooks/useAuth';
-import { selectAuth } from '@/redux/slices/auth.slice'
+// import { useAuth } from '@/hooks/useAuth';
+// import { selectAuth } from '@/redux/slices/auth.slice'
+// import { useAppSelector } from '@/types/redux/redux'
+
 import { StoreLogin } from '@/types/entities/auth-entity'
-import { useAppSelector } from '@/types/redux/redux'
-import { Col, Form, Image, Input, Row, Typography, Button } from 'antd'
-import React, { useEffect } from 'react'
+
+import { Col, Form, Input, Row, Typography, Button } from 'antd'
+import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import {motion} from 'framer-motion'
 import useSessionAuth from '@/hooks/useSessionAuth';
-import { i } from 'framer-motion/client';
 import { toast } from 'react-toastify';
-import { SessionProvider } from 'next-auth/react';
+// import { SessionProvider } from 'next-auth/react';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -37,9 +38,10 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (values: StoreLogin) => {
     try {
       const result = await onLogin(values);
+      console.log('result: ', result);
       toast.success("Login successfully");
     } catch (error) {
-      toast.error("Internal error during login");
+      toast.error("Internal error during login " + error);
     }
     
   };

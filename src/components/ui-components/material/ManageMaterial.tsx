@@ -4,15 +4,16 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { Table, Button, Modal, Form, Input, Upload, Tag } from "antd";
 import { toast } from "react-toastify";
-import { BookmarkPlus, Pen, Tags, Trash, SearchIcon, Delete, UploadIcon, Blocks } from "lucide-react";
+import { BookmarkPlus, Pen, Trash, SearchIcon, UploadIcon, Blocks } from "lucide-react";
 
 import { CreateMaterial, DeleteMaterial, EditMaterial, GetAllMaterial } from "@/services/material-service";
 import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
 import { Material } from "@/types/entities/material-entity";
+import Image from "next/image";
 
 const ManageMaterial: React.FC = () => {
-    const { data: materials , mutate } = useSWR(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/material", GetAllMaterial, { fallbackData: [] });
+    const { data: materials , mutate } = useSWR<Material[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/material", GetAllMaterial, { fallbackData: [] });
     const [form] = Form.useForm();
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -22,7 +23,7 @@ const ManageMaterial: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-    const filteredMaterials = (materials as any).data?.filter((material: { MaterialName: string; }) =>
+    const filteredMaterials = (materials ?? [])?.filter((material: { MaterialName: string; }) =>
         material.MaterialName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
 
@@ -35,7 +36,7 @@ const ManageMaterial: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error adding material");
+            toast.error("Error adding material " + error);
         }
     };
 
@@ -50,7 +51,7 @@ const ManageMaterial: React.FC = () => {
             toast.success("Material updated successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error updating material");
+            toast.error("Error updating material " + error);
         }
     };
 
@@ -60,7 +61,7 @@ const ManageMaterial: React.FC = () => {
             mutate(); 
             toast.success("Material deleted successfully");
         } catch (error) {
-            toast.error("Error deleting material");
+            toast.error("Error deleting material " + error);
         }
     };
 
@@ -69,13 +70,13 @@ const ManageMaterial: React.FC = () => {
             title: "Material Image",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text ? text : "/faq.png"} alt="Material Image" className="w-10 h-10 border border-gray-300 rounded-lg " />,
+            render: (text: string) => <Image src={text ? text : "/faq.png"} alt="Material Image" width={40} height={40} className="border border-gray-300 rounded-lg " />,
         },
         {
             title: "Material Name",
             // dataIndex: "BrandName",
             key: "MaterialName",
-            render: (_: any, record: Material) => (
+            render: (_: unknown, record: Material) => (
                 <Tag color="orange">{record.MaterialName}</Tag>
             ),
         },
@@ -88,7 +89,7 @@ const ManageMaterial: React.FC = () => {
         {
             title: "Edit Material",
             key: "edit",
-            render: (_: any, record: Material) => (
+            render: (_: unknown, record: Material) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -104,7 +105,7 @@ const ManageMaterial: React.FC = () => {
         {
             title: "Delete",
             key: "delete",
-            render: (_: any, record: Material) => (
+            render: (_: unknown, record: Material) => (
                 <Button
                     icon={<Trash />}
                     danger

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { Table, Button, Modal, Form, Input, Upload, Select, Tag } from "antd";
 import { toast } from "react-toastify";
-import { BookmarkPlus, Pen, Tags, Trash, SearchIcon, UploadIcon } from "lucide-react";
+import { BookmarkPlus, Pen, Trash, SearchIcon, UploadIcon } from "lucide-react";
 import { Furnitype } from "@/types/entities/furnitype-entity";
 import { CreateFurnitype, DeleteFurnitype, EditFurnitype, GetAllFurnitype } from "@/services/furnitype-service";
 import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
 import { RoomSpace } from "@/types/entities/roomspace-entity";
 import { GetAllRoomSpace } from "@/services/roomspace-service";
+import Image from "next/image";
 
 const ManageFurniType: React.FC = () => {
     const { data: FurniTypes, mutate, isLoading } = useSWR<Furnitype[]>(
@@ -45,7 +46,7 @@ const ManageFurniType: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error adding FurniType");
+            toast.error("Error adding FurniType " + error);
         }
     };
 
@@ -60,7 +61,7 @@ const ManageFurniType: React.FC = () => {
             toast.success("FurniType updated successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error updating FurniType");
+            toast.error("Error updating FurniType " + error);                        
         }
     };
 
@@ -70,7 +71,7 @@ const ManageFurniType: React.FC = () => {
             mutate();
             toast.success("FurniType deleted successfully");
         } catch (error) {
-            toast.error("Error deleting FurniType");
+            toast.error("Error deleting FurniType " + error);
         }
     };
 
@@ -79,23 +80,23 @@ const ManageFurniType: React.FC = () => {
             title: "FurniType Image",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text || "/faq.png"} alt="FurniType logo" className="w-10 h-10" />,
+            render: (text: string) => <Image src={text || "/faq.png"} alt="FurniType logo" width={40} height={40} />,
         },
         {
             title: "FurniType Name",
             key: "FurniTypeName",
-            render: (_: any, record: Furnitype) => (
+            render: (_: unknown, record: Furnitype) => (
                 <Tag color="orange">{record.FurnitureTypeName}</Tag>
             ),
         },
         {
             title: "Room Space",
             key: "RoomSpace",
-            render: (_: any, record: Furnitype) => {
+            render: (_: unknown, record: Furnitype) => {
                 const roomSpace = RoomSpaces?.find(rs => rs.Id === record.RoomSpaceId);
                 return roomSpace ? (
                     <div className="flex items-center space-x-2">
-                        <img src={roomSpace.ImageSource || "/faq.png"} alt="RoomSpace" className="w-8 h-8" />
+                        <Image src={roomSpace.ImageSource || "/faq.png"} alt="RoomSpace" width={40} height={40} />
                         <span>{roomSpace.RoomSpaceName}</span>
                     </div>
                 ) : null;
@@ -109,7 +110,7 @@ const ManageFurniType: React.FC = () => {
         {
             title: "Edit",
             key: "edit",
-            render: (_: any, record: Furnitype) => (
+            render: (_: unknown, record: Furnitype) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -125,7 +126,7 @@ const ManageFurniType: React.FC = () => {
         {
             title: "Delete",
             key: "delete",
-            render: (_: any, record: Furnitype) => (
+            render: (_: unknown, record: Furnitype) => (
                 <Button
                     icon={<Trash />}
                     danger
@@ -205,7 +206,7 @@ const ManageFurniType: React.FC = () => {
                                 value: room.Id,
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <img src={room.ImageSource || "/faq.png"} alt="RoomSpace" className="w-6 h-6" />
+                                        <Image src={room.ImageSource || "/faq.png"} alt="RoomSpace" width={25} height={25} />
                                         <span>{room.RoomSpaceName}</span>
                                     </div>
                                 ),
@@ -251,7 +252,7 @@ const ManageFurniType: React.FC = () => {
                                 value: room.Id,
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <img src={room.ImageSource || "/faq.png"} alt="RoomSpace" className="w-6 h-6" />
+                                        <Image src={room.ImageSource || "/faq.png"} alt="RoomSpace" width={25} height={25} />
                                         <span>{room.RoomSpaceName}</span>
                                     </div>
                                 ),

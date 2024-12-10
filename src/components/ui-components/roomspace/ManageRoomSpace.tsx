@@ -9,6 +9,7 @@ import { RoomSpace } from "@/types/entities/roomspace-entity";
 import { CreateRoomSpace, DeleteRoomSpace, EditRoomSpace, GetAllRoomSpace } from "@/services/roomspace-service";
 import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
+import Image from "next/image";
 
 const ManageRoomSpace: React.FC = () => {
     const { data: RoomSpaces , mutate } = useSWR<RoomSpace[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/roomspace", GetAllRoomSpace, { fallbackData: [] });
@@ -37,7 +38,7 @@ const ManageRoomSpace: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error adding RoomSpace");
+            toast.error("Error adding RoomSpace " + error);
         }
     };
 
@@ -52,7 +53,7 @@ const ManageRoomSpace: React.FC = () => {
             toast.success("RoomSpace updated successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error updating RoomSpace");
+            toast.error("Error updating RoomSpace " + error);
         }
     };
 
@@ -62,7 +63,7 @@ const ManageRoomSpace: React.FC = () => {
             mutate(); 
             toast.success("RoomSpace deleted successfully");
         } catch (error) {
-            toast.error("Error deleting RoomSpace");
+            toast.error("Error deleting RoomSpace " + error);
         }
     };
 
@@ -71,13 +72,13 @@ const ManageRoomSpace: React.FC = () => {
             title: "RoomSpace Image",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text ? text : "/faq.png"} alt="RoomSpace logo" className="w-10 h-10" />,
+            render: (text: string) => <Image src={text ? text : "/faq.png"} alt="RoomSpace logo" width={40} height={40} />,
         },
         {
             title: "RoomSpace Name",
             // dataIndex: "RoomSpaceName",
             key: "RoomSpaceName",
-            render: (_: any, record: RoomSpace) => (
+            render: (_: unknown, record: RoomSpace) => (
                 <Tag color="orange">{record.RoomSpaceName}</Tag>
             ),
         },
@@ -90,7 +91,7 @@ const ManageRoomSpace: React.FC = () => {
         {
             title: "Edit RoomSpace",
             key: "edit",
-            render: (_: any, record: RoomSpace) => (
+            render: (_: unknown, record: RoomSpace) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -106,7 +107,7 @@ const ManageRoomSpace: React.FC = () => {
         {
             title: "Delete",
             key: "delete",
-            render: (_: any, record: RoomSpace) => (
+            render: (_: unknown, record: RoomSpace) => (
                 <Button
                     icon={<Trash />}
                     danger

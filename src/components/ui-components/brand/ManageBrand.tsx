@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import { Table, Button, Modal, Form, Input, Upload, Tag } from "antd";
+import Image from 'next/image';
 import { toast } from "react-toastify";
 import { BookmarkPlus, Pen, Tags, Trash, SearchIcon, UploadIcon } from "lucide-react";
 import { Brand } from "@/types/entities/brand-entity";
@@ -52,7 +53,7 @@ const ManageBrand: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error adding brand");
+            toast.error("Error adding brand " + error);
         }
     };
 
@@ -67,7 +68,7 @@ const ManageBrand: React.FC = () => {
             toast.success("Brand updated successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error updating brand");
+            toast.error("Error updating brand " + error);
         }
     };
 
@@ -77,7 +78,7 @@ const ManageBrand: React.FC = () => {
             mutate(); 
             toast.success("Brand deleted successfully");
         } catch (error) {
-            toast.error("Error deleting brand");
+            toast.error("Error deleting brand " + error);
         }
     };
 
@@ -85,14 +86,13 @@ const ManageBrand: React.FC = () => {
         {
             title: "Brand Image",
             dataIndex: "ImageSource",
-            key: "ImageSource",
-            render: (text: string) => <img src={text ? text : "/faq.png"} alt="brand logo" className="w-10 h-10" />,
+            render: (text: string) => <Image src={text ? text : "/faq.png"} alt="brand logo" width={40} height={40} className="w-10 h-10" />,
         },
         {
             title: "Brand Name",
             // dataIndex: "BrandName",
             key: "BrandName",
-            render: (_: any, record: Brand) => (
+            render: (_: unknown, record: Brand) => (
                 <Tag color="blue">{record.BrandName}</Tag>
             ),
         },
@@ -105,7 +105,7 @@ const ManageBrand: React.FC = () => {
         {
             title: "Edit Brand",
             key: "edit",
-            render: (_: any, record: Brand) => (
+            render: (_: unknown, record: Brand) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -121,7 +121,7 @@ const ManageBrand: React.FC = () => {
         {
             title: "Delete",
             key: "delete",
-            render: (_: any, record: Brand) => (
+            render: (_: unknown, record: Brand) => (
                 <Button
                     icon={<Trash />}
                     danger

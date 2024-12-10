@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { Table, Button, Modal, Form, Input, Upload, Select, Tag } from "antd";
 import { toast } from "react-toastify";
-import { BookmarkPlus, Pen, Tags, Trash, SearchIcon, UploadIcon } from "lucide-react";
+import { BookmarkPlus, Pen, Trash, SearchIcon, UploadIcon } from "lucide-react";
 import { Category } from "@/types/entities/category-entity";
 import { CreateCategory, DeleteCategory, EditCategory, GetAllCategory } from "@/services/category-service";
 import envConfig from "@/configs/config";
 import useDebounce from "@/hooks/useDebounce";
 import { Furnitype } from "@/types/entities/furnitype-entity";
 import { GetAllFurnitype } from "@/services/furnitype-service";
+import Image from "next/image";
 
 const ManageCategory: React.FC = () => {
     const { data: Categories, mutate, isLoading } = useSWR<Category[]>(
@@ -45,7 +46,7 @@ const ManageCategory: React.FC = () => {
             setIsAddModalVisible(false);
             form.resetFields();
         } catch (error) {
-            toast.error("Error while adding Category");
+            toast.error("Error while adding Category " + error);
         }
     };
 
@@ -60,7 +61,7 @@ const ManageCategory: React.FC = () => {
             toast.success("Category updated successfully");
             form.resetFields();
         } catch (error) {
-            toast.error("Error updating Category");
+            toast.error("Error updating Category " + error);
         }
     };
 
@@ -70,7 +71,7 @@ const ManageCategory: React.FC = () => {
             mutate();
             toast.success("Category deleted successfully");
         } catch (error) {
-            toast.error("Error deleting Category");
+            toast.error("Error deleting Category " + error);
         }
     };
 
@@ -79,23 +80,23 @@ const ManageCategory: React.FC = () => {
             title: "Category Image",
             dataIndex: "ImageSource",
             key: "ImageSource",
-            render: (text: string) => <img src={text || "/faq.png"} alt="Category logo" className="w-10 h-10" />,
+            render: (text: string) => <Image src={text || "/faq.png"} alt="Category logo" width={40} height={40} />,
         },
         {
             title: "Category Name",
             key: "CategoryName",
-            render: (_: any, record: Category) => (
+            render: (_: unknown, record: Category) => (
                 <Tag color="orange">{record.CategoryName}</Tag>
             ),
         },
         {
             title: "Room Space",
             key: "RoomSpace",
-            render: (_: any, record: Category) => {
+            render: (_: unknown, record: Category) => {
                 const furnitypes = Furnitypes?.find((furnitype) => furnitype.Id === record.FurnitureTypeId);
                 return furnitypes ? (
                     <div className="flex items-center space-x-2">
-                        <img src={furnitypes.ImageSource || "/faq.png"} alt="RoomSpace" className="w-8 h-8" />
+                        <Image src={furnitypes.ImageSource || "/faq.png"} alt="RoomSpace" width={40} height={40} />
                         <span>{furnitypes.FurnitureTypeName}</span>
                     </div>
                 ) : null;
@@ -109,7 +110,7 @@ const ManageCategory: React.FC = () => {
         {
             title: "Edit",
             key: "edit",
-            render: (_: any, record: Category) => (
+            render: (_: unknown, record: Category) => (
                 <Button
                     icon={<Pen />}
                     onClick={() => {
@@ -125,7 +126,7 @@ const ManageCategory: React.FC = () => {
         {
             title: "Delete",
             key: "delete",
-            render: (_: any, record: Category) => (
+            render: (_: unknown, record: Category) => (
                 <Button
                     icon={<Trash />}
                     danger
@@ -205,7 +206,7 @@ const ManageCategory: React.FC = () => {
                                 value: furnitype.Id,
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <img src={furnitype.ImageSource || "/faq.png"} alt="Furniture Type" className="w-6 h-6" />
+                                        <Image src={furnitype.ImageSource || "/faq.png"} alt="Furniture Type" className="w-6 h-6" />
                                         <span>{furnitype.FurnitureTypeName}</span>
                                     </div>
                                 ),
@@ -251,7 +252,7 @@ const ManageCategory: React.FC = () => {
                                 value: room.Id,
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <img src={room.ImageSource || "/faq.png"} alt="Furniture Type" className="w-6 h-6" />
+                                        <Image src={room.ImageSource || "/faq.png"} alt="Furniture Type" className="w-6 h-6" />
                                         <span>{room.FurnitureTypeName}</span>
                                     </div>
                                 ),

@@ -2,7 +2,7 @@ import { AppDispatch, RootState } from '@/redux/store'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 export type ActionRedux = {
   type: string
-  payload: any
+  payload: unknown
 }
 
 export type NotifyScreen = { open: boolean; message: string; type: string }

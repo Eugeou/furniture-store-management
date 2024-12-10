@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Slack, Sofa, Tags } from "lucide-react";
+import { Slack } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const ManageCategory = dynamic(() => import("@/components/ui-components/category/ManageCategory"), {

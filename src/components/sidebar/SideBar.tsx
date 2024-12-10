@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Calendar, FileText, Users, UserPlus, File, Lock, Wand, MessageSquare, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Menu, Package, PencilRuler, PackageOpen, TicketPercent, CalendarHeart, BookUser, Scroll, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles } from 'lucide-react';
+import { FileText, Users, UserPlus, ChevronDown, ChevronLeft, ChevronRight, Package, PackageOpen, TicketPercent, CalendarHeart, BookUser, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles } from 'lucide-react';
 import { LayoutDashboardIcon } from 'lucide-react';
-import { Tags, PersonStanding, Slack } from 'lucide-react';
-import { BgColorsOutlined, OrderedListOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/navigation';
+import { Tags, Slack } from 'lucide-react';
+import { BgColorsOutlined } from '@ant-design/icons';
+//import { useRouter } from 'next/navigation';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
   
-  const router = useRouter();
+  //const router = useRouter();
   
   useEffect(() => {
     const storedRole = localStorage.getItem('role');

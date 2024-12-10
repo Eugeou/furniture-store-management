@@ -1,6 +1,6 @@
-import { StoreLogin, StoreToken, StoreUser, UserProps } from "@/types/entities/auth-entity";
-import type { NextAuthOptions } from "next-auth";
-import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import { StoreLogin, StoreUser, UserProps } from "@/types/entities/auth-entity";
+import type { JWT, NextAuthOptions } from "next-auth";
+import axios, { AxiosResponse } from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 import envConfig from "@/configs/config";
 
@@ -31,8 +31,8 @@ export const authOptions = {
             StoreLogin,
             AxiosResponse<{ data: StoreUser }>
           >(`${BASE_URL}/auth/signin`, {
-            email: credentials?.email!,
-            password: credentials?.password!,
+            email: credentials.email,
+            password: credentials.password,
           });
           console.log(data);
 
@@ -60,13 +60,14 @@ export const authOptions = {
           }
         console.log(53, data);
           throw new Error("Invalid credentials");
-        } catch (error: AxiosError | any) {
-
-          console.log(57,error);
-          console.log( 58,error?.response?.data?.message || error?.message)
-          throw new Error(
-            error?.response?.data?.message || error?.message || "Login failed"
-          );
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            throw new Error(
+              error.response?.data?.message || error.message || "Login failed"
+            );
+          } else {
+            throw new Error("Login failed");
+          }
         }
       },
     }),
@@ -84,8 +85,8 @@ export const authOptions = {
       return token;
     },
     // Callback session để lưu access token vào session
-    async session({ session, token }: any) {
-      session.accessToken = token.accessToken;
+    async session({ session, token }) {
+      session.accessToken = (token as JWT).accessToken;
       session.user = token.user;
       return session;
     },

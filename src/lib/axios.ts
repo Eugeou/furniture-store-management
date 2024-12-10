@@ -37,13 +37,14 @@ axiosClient.interceptors.response.use(
               originalRequest.headers['Authorization'] = `Bearer ${access}`
               return axiosClient(originalRequest)
             }
-          } catch (error: any) {
+          } catch (error) {
             // Dispatch action để clear Redux (đăng xuất người dùng)
             store.dispatch(logout())
-            toast.error(error?.response?.data?.message || 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!')
+            console.error(error)
+            toast.error('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!')
           }
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error(error)
         // notifyError(error?.response?.data?.message || 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!')
       }
