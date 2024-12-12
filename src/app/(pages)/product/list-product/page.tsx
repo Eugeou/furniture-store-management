@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Blocks } from "lucide-react";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
 
-// const ManageMaterial = dynamic(() => import("@/components/ui-components/material/ManageMaterial"), {
-//   ssr: false,
-// });
+const ProductList = dynamic(() => import("@/components/ui-components/products/product-list/ProductList"), {
+  ssr: false,
+});
 
 const ProductPage: React.FC = () => {
 
@@ -16,7 +16,7 @@ const ProductPage: React.FC = () => {
         <Blocks className="ml-5 flex text-lg font-bold text-center text-indigo-600" />
         <h3 className="space-y-0 font-semibold">Product List</h3>
       </div>
-      {/* <ManageMaterial /> */}
+      <ProductList />
       
     </div>
   );

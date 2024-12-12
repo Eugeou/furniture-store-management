@@ -20,4 +20,30 @@ export type ProductVariant = {
     Thumbnail: File;
     ProductVariants: ProductVariant[];
   };
+
+  export type ProductGet = {
+    Id: string;
+    ProductName: string;
+    Unit: string;
+    Description: string;
+    BrandName: string;
+    CategoryName: string;
+    Designers: string[];
+    Materials: string[];
+    DisplayPrice: string;
+    Discount?: number;
+    ImageSource: string;
+    ProductVariants: ProductVariantGet[];
+  };
+
+  export type ProductVariantGet = {
+    Id: string;
+    ColorId: string;
+    ColorName: string;
+    DisplayDimension: string;
+    Quantity: number;
+    Price: number;
+    ImageSource: string[];
+  };
+
   
