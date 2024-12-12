@@ -193,7 +193,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               >
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
                   <TicketPercent  className="mr-2" />
-                  <Link href="/pages/manage-event">Coupons</Link>
+                  <Link href="/coupon">Coupons</Link>
                 </li>
               </ul>
             </>

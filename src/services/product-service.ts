@@ -63,7 +63,7 @@ export const GetDetailProduct = async (id: string): Promise<ProductGet> => {
   return data;
 };
 
-export const EditProduct = async (id: string, product: Product): Promise<void> => {
+export const UpdateProduct = async (id: string, product: Product): Promise<void> => {
   const data = new FormData();
 
   data.append('ProductName', product.ProductName);

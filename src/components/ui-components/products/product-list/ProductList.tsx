@@ -263,7 +263,7 @@ const ProductList: React.FC = () => {
                         <div className="mt-4">
                             <label className="block text-xs font-semibold mb-2">Discount</label>
                             <div className="p-2 border border-gray-700 rounded-lg">
-                                <p className="text-sm">{selectedProduct.Discount}</p>
+                                <p className="text-sm">{selectedProduct.Discount} %</p>
                             </div>
                         </div>
                         <div className="mt-4">
