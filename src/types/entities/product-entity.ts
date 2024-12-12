@@ -1,43 +1,23 @@
-export interface Product {
-    Id: string;
+export type ProductVariant = {
+    colorId: string;
+    length: number;
+    width: number;
+    height: number;
+    quantity: number;
+    price: number;
+    images: File[];
+  };
+  
+  export type Product = {
     ProductName: string;
     Unit: string;
     Description: string;
-    price: number;
-    CategoryId: string;
     BrandId: string;
-    DesignerId: string[];
-    MaterialId: string[];
-    //ProductVariant: ProductVariant[];
-    Discount: number;
-    Thumbnail: string;
-}
-
-export interface ProductRequest {
-    ProductName: string;
-    Description: string;
-    
-    category: string;
-    branch: string;
-    productItemRequests: ProductItemRequest[];
-  }
+    CategoryId: string;
+    DesignersId: string[];
+    MaterialsId: string[];
+    Discount?: number;
+    Thumbnail: File;
+    ProductVariants: ProductVariant[];
+  };
   
-export interface ProductItemRequest {
-    size: number;
-    color: number;
-}
-  
-export interface CreateProductForm {
-    productRequest: ProductRequest;
-    Thumbnail: FileList;
-}
-
-
-//Concrete product
-export interface ProductItem {
-    id: string;
-    sizeName: string;
-    colorName: string;
-    quantity: number;
-    price: number;
-}

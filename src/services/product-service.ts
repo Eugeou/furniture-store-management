@@ -1,46 +1,50 @@
+// api/createProduct.ts
+import axios from 'axios';
+import FormData from 'form-data';
+import { Product } from '@/types/entities/product-entity';
+import axiosClient from '@/lib/axios';
 
-// import axios from 'axios';
-// import { CreateProductForm } from '@/src/types';
-// import envConfig from '@/configs/config';
+export const createProduct = async (product: Product): Promise<void> => {
+  const data = new FormData();
 
+  data.append('ProductName', product.ProductName);
+  data.append('Unit', product.Unit);
+  data.append('Description', product.Description);
+  data.append('Thumbnail', product.Thumbnail);
+  data.append('BrandId', product.BrandId);
+  data.append('CategoryId', product.CategoryId);
 
-// const AddProductUrl = envConfig.NEXT_PUBLIC_API_ENDPOINT + '/products';
-// const accessToken = localStorage.getItem('access_token');
+  product?.DesignersId.forEach((id, index) => data.append(`DesignersId[${index}]`, id));
+  product?.MaterialsId.forEach((id, index) => data.append(`MaterialsId[${index}]`, id));
 
-// export const AddProduct = async (data: CreateProductForm) => {
-//   const formData = new FormData();
+  if (product.Discount) {
+    data.append('Discount', product.Discount.toString());
+  }
+
+  product.ProductVariants?.forEach((variant, index) => {
+    data.append(`ProductVariants[${index}].colorId`, variant.colorId);
+    data.append(`ProductVariants[${index}].length`, variant.length.toString());
+    data.append(`ProductVariants[${index}].width`, variant.width.toString());
+    data.append(`ProductVariants[${index}].height`, variant.height.toString());
+    data.append(`ProductVariants[${index}].quantity`, variant.quantity.toString());
+    data.append(`ProductVariants[${index}].price`, variant.price.toString());
+    variant.images?.forEach((image) =>
+      data.append(`ProductVariants[${index}].Images`, image)
+    );
+  });
+
+  const config = {
+    headers: {
+        "Content-Type": "multipart/form-data",
+    },
+    };
+
   
-//   // Append productRequest fields
-//   formData.append('product_Name', data.productRequest.product_Name);
-//   formData.append('description', data.productRequest.description);
-//   formData.append('price', data.productRequest.price.toString());
-//   formData.append('category', data.productRequest.category);
-//   formData.append('branch', data.productRequest.branch);
-
-//   data.productRequest.productItemRequests.forEach((item, index) => {
-//     formData.append(`productItemRequests[${index}].size`, item.size.toString());
-//     formData.append(`productItemRequests[${index}].color`, item.color.toString());
-//   });
-
-//   // Append images
-//   for (let i = 0; i < data.images.length; i++) {
-//     formData.append('images', data.images[i]);
-//   }
-
-//   if (!accessToken) {
-//     throw new Error('No access token found');
-//   }
-
-//   const parseToken = ParseJSON(accessToken);
-
-//   const response = await axios.post(AddProductUrl, formData, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//       'Authorization': `Bearer ${parseToken}`,
-//     },
-//   });
-
-//   return response.data;
-// };
-
-
+    try {
+        const response = await axiosClient.post("/product", data, config);
+        return response.data;
+    } catch (error) {
+        console.error('Create product failed:', error);
+        throw error;
+    }
+};
