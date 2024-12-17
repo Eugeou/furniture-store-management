@@ -103,7 +103,7 @@ const handleUnban = async (userId: string) => {
             <span className="inline-block h-10 w-10 rounded-full bg-gray-200"></span>
           )}
           <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">{user.FullName}</div>
+            <div className="text-sm font-medium text-gray-900 text-nowrap">{user.FullName}</div>
           </div>
         </div>
       ),
