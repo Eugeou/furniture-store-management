@@ -58,7 +58,7 @@ export const authOptions = {
               accessToken: data.data?.AccessToken,
             };
           }
-        console.log(53, data);
+        //console.log(53, data);
           throw new Error("Invalid credentials");
         } catch (error) {
           if (axios.isAxiosError(error)) {

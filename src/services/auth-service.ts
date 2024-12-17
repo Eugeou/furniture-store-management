@@ -3,6 +3,7 @@ import envConfig from "@/configs/config";
 import { StoreLogin } from "@/types/entities/auth-entity";
 import axiosClient from "@/lib/axios";
 import axios from "axios";
+import { header } from "framer-motion/m";
 
 // // const getAccessToken = () => (typeof window !== "undefined" ? localStorage.getItem("access_token") : null);
 // const accessToken = localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : null;
@@ -71,6 +72,16 @@ export const login = async (bodyLogin: StoreLogin) => {
 //       throw new Error('Logout failed');
 //     }
 // };
+
+export const logout = async (userId: string)=> {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const { data } = await axiosClient.post(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/auth/signout', JSON.stringify(userId) , config)
+  return data;
+}
 
 export const GetMe = async ()=> {
   const { data } = await axiosClient.get(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/auth/me', {

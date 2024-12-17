@@ -43,14 +43,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   };
 
   return (
-    <div className={`fixed left-0 top-0 overflow-y-auto bg-white shadow-2xl border border-slate-200 rounded-2xl text-indigo-500 ${isCollapsed ? 'w-20' : 'w-64'} h-full fixed flex flex-col transition-all duration-300`}>
+    <div className={`fixed left-0 top-0 overflow-y-auto bg-white shadow-2xl border border-slate-200 rounded-2xl text-green-900 ${isCollapsed ? 'w-20' : 'w-64'} h-full fixed flex flex-col transition-all duration-300`}>
       <div className="flex justify-between items-center p-4">
         
         {!isCollapsed && 
         <div className="text-2xl font-bold">
           FurniStore
         </div>}
-        <button onClick={handleCollapseClick} className="text-gray-100 bg-indigo-600 h-8 w-8 rounded-lg shadow-xl">
+        <button onClick={handleCollapseClick} className="text-gray-100 bg-green-800 h-8 w-8 rounded-lg shadow-xl">
           {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
         </button>
       </div>
@@ -59,13 +59,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Only render for ADMIN */}
           {role === 'ADMIN' && (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-800">
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-800">
                 <LayoutDashboardIcon className="mr-2" />
                 {!isCollapsed && <Link href="/pages/dashboard">Dashboard</Link>}
               </li>
 
               {/*Category Link */}
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('category')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('category')}>
                 <div className="flex items-center cursor-pointer">
                   <Sofa className="mr-2" />
                   {!isCollapsed && 'Furniture type'}
@@ -82,19 +82,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   openDropdown === 'category' && !isCollapsed ? 'max-h-64' : 'max-h-0'
                 }`}
               >
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <Tags  className="mr-2" />
                   <Link href="/brand">Brands</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <Proportions className="mr-2" />
                   <Link href="/roomspace">Room Space</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <Slack className="mr-2" />
                   <Link href="/category">Category</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <Sofa className="mr-2" />
                   <Link href="/furniture-type">Furniture Type</Link>
                 </li>
@@ -105,7 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Product Link */}
           {role === 'ADMIN' || role === 'STAFF' ? (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('product')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('product')}>
                 <div className="flex items-center cursor-pointer">
                   <Package className="mr-2" />
                   {!isCollapsed && 'Products'}
@@ -122,19 +122,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   openDropdown === 'product' && !isCollapsed ? 'max-h-64' : 'max-h-0'
                 }`}
               >
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <BgColorsOutlined  className="mr-2" />
                   <Link href="/color">Colors</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <Blocks className="mr-2" />
                   <Link href="/material">Materials</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <WandSparkles className="mr-2" />
                   <Link href="/designer">Designer</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <PackageOpen className="mr-2" />
                   <Link href="/product/list-product">Products list</Link>
                 </li>
@@ -142,7 +142,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
 
 
               {/*Imports Link */}
-            <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('invoices')}>
+            <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('invoices')}>
               <div className="flex items-center cursor-pointer">
                 <Import className="mr-2" />
                 {!isCollapsed && 'Import'}
@@ -158,12 +158,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 openDropdown === 'invoices' && !isCollapsed ? 'max-h-64' : 'max-h-0'
               }`}
             >
-              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                 <ScrollText className="mr-2 rounded-md" />
                 <Link href="/pages/imports/list-imports">List invoices</Link>
               </li>
               
-              <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+              <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                 <Blocks className="mr-2" />
                 <Link href="/pages/imports/add-import">Import products</Link>
               </li>
@@ -174,7 +174,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Events Link */}
           {role === 'ADMIN' || role === 'STAFF' ? (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('events')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('events')}>
                 <div className="flex items-center cursor-pointer">
                   <CalendarHeart className="mr-2" />
                   {!isCollapsed && 'Events'}
@@ -191,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   openDropdown === 'events' && !isCollapsed ? 'max-h-64' : 'max-h-0'
                 }`}
               >
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-indigo-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <TicketPercent  className="mr-2" />
                   <Link href="/coupon">Coupons</Link>
                 </li>
@@ -204,7 +204,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             <>
               
 
-            <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('customers')}>
+            <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('customers')}>
               <div className="flex items-center cursor-pointer">
                 <Users className="mr-2" />
                 {!isCollapsed && 'Customers'}
@@ -220,12 +220,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 openDropdown === 'customers' && !isCollapsed ? 'max-h-64' : 'max-h-0'
               }`}
             >
-              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                 <FileText className="mr-2 rounded-md" />
                 <Link href="/customer/list-customer">Customers List</Link>
               </li>
               
-              <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+              <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                 <UserPlus className="mr-2" />
                 <Link href="/pages/manage-customers/add-customer">Add Customer</Link>
               </li>
@@ -236,7 +236,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Staffs Link */}
           {role === 'ADMIN' ? (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('users')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('users')}>
                 <div className="flex items-center cursor-pointer">
                   <BookUserIcon className="mr-2" />
                   {!isCollapsed && 'Staffs'}
@@ -252,14 +252,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   openDropdown === 'users' && !isCollapsed ? 'max-h-64' : 'max-h-0'
                 }`}
               >
-                <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+                <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                   <BookUser className="mr-2 rounded-md" />
                   <Link href="/staff/list-staff">Staffs List</Link>
                 </li>
                 
-                <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+                <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                   <UserPlus className="mr-2" />
-                  <Link href="/pages/manage-users/add-user">Add User</Link>
+                  <Link href="/staff/add-staff">Add Staff</Link>
                 </li>
               </ul>
             </>
@@ -268,7 +268,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Orders Link */}
           {role === 'ADMIN' || role === 'STAFF' ? (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('orders')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('orders')}>
             <div className="flex items-center cursor-pointer">
               <ListOrdered className="mr-2" />
               {!isCollapsed && 'Orders'}
@@ -284,12 +284,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               openDropdown === 'orders' && !isCollapsed ? 'max-h-64' : 'max-h-0'
             }`}
           >
-            <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+            <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
               <ListOrdered className="mr-2 rounded-md" />
               <Link href="/pages/orders/list-orders">List orders</Link>
             </li>
             
-            <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+            <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
               <FilePlus className="mr-2" />
               <Link href="/pages/orders/create-order">Create order</Link>
             </li>
@@ -300,7 +300,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           {/* Reports Link */}
           {role === 'ADMIN' ? (
             <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('reports')}>
+              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('reports')}>
               <div className="flex items-center cursor-pointer">
                 <PieChart className="mr-2" />
                 {!isCollapsed && 'Reports'}
@@ -316,17 +316,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 openDropdown === 'reports' && !isCollapsed ? 'max-h-64' : 'max-h-0'
               }`}
             >
-              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                 <ListOrdered className="mr-2 rounded-md" />
                 <Link href="/pages/reports/daily-report">Daily reports</Link>
               </li>
               
-              <li className=" p-2 mb-2 rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+              <li className=" p-2 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                 <LineChart className="mr-2" />
                 <Link href="/pages/reports/monthly-report">Monthly reports</Link>
               </li>
 
-              <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+              <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                 <TrendingUp className="mr-2" />
                 <Link href="/pages/reports/yearly-report">Yearly reports</Link>
               </li>

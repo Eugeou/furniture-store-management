@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Table, Button, Modal, Form, Input, Upload, Tag } from "antd";
 import Image from 'next/image';
@@ -15,6 +15,8 @@ const ManageBrand: React.FC = () => {
     const { data: brands , mutate } = useSWR<Brand[]>(envConfig.NEXT_PUBLIC_API_ENDPOINT + "/brand", GetAllBrand, { fallbackData: [] });
     const [form] = Form.useForm();
 
+    console.log('access token', localStorage.getItem("accessToken"));
+
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [editingBrand, setEditingBrand] = useState<Brand | null>(null);
@@ -25,6 +27,7 @@ const ManageBrand: React.FC = () => {
     const filteredBrands = (brands ?? []).filter((brand: { BrandName: string; }) =>
         brand.BrandName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     );
+
 
     // const Loops = async () => {
     //     const data = await GetAllBrand();
