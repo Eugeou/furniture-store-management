@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { Check, ChevronDown, Users, RefreshCcw, Eye, Search, PencilIcon, Trash } from 'lucide-react';
+import { Check, ChevronDown, Users, RefreshCcw, Eye, Search, PencilIcon, Trash, BookmarkPlus } from 'lucide-react';
 import { Table, Button, Menu, Dropdown, Select, Input, Image, Tag } from 'antd';
 import useSWR from 'swr';
 import useDebounce from '@/hooks/useDebounce';
@@ -51,7 +51,7 @@ const ManageCustomers: React.FC = () => {
 
   const columns = [
     {
-      title: 'User',
+      title: 'Customer',
       dataIndex: 'fullName',
       key: 'fullName',
       render: (text: string, user: CustomerEntity) => (
@@ -128,15 +128,18 @@ const ManageCustomers: React.FC = () => {
 
   return (
     <div>
-      <div className=" flex flex-row space-x-2 space-y-0 mt-4 w-full">
+      <div className=" flex flex-row space-x-2 space-y-0 mt-4 w-full justify-between">
         <Input 
-          className="focus:placeholder-transparent focus:border-blue-500 mb-8 w-full h-10 border border-gray-400 rounded-lg shadow-lg" 
+          className="focus:placeholder-transparent focus:border-blue-500 mb-8 w-2/3 h-10 border border-gray-400 rounded-lg shadow-lg" 
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by customer name"
           size="middle"
           prefix={<Search />}
         />
 
+        <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg h-10" onClick={() => window.location.href = '/customer/add-customer'}>
+            Add new Customer
+        </Button>
         
       </div>
 

@@ -9,3 +9,12 @@ export type CustomerEntity = {
     IsDeleted: boolean;
     IsLocked: boolean;
 };
+
+export type CreateCustomer = {
+    fullName: string;
+    email: string;
+    dateOfBirth: string;
+    phoneNumber: string;
+    password: string;
+    userClaimsRequest: number[];
+};
