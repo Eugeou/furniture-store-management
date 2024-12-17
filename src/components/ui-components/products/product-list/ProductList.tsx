@@ -52,7 +52,8 @@ const ProductList: React.FC = () => {
     };
 
     const handleEdit = (id: string) => {
-        router.push(`/edit-product/${id}`);
+        //router.push(`/edit-product/${id}`);
+        toast.info('Edit product feature is under development');
     };
 
     const columns = [

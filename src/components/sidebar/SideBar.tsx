@@ -222,7 +222,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             >
               <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                 <FileText className="mr-2 rounded-md" />
-                <Link href="/pages/manage-customers/list-customers">List Customers</Link>
+                <Link href="/customer/list-customer">Customers List</Link>
               </li>
               
               <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">

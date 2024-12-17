@@ -89,10 +89,13 @@ const ManageCoupon: React.FC = () => {
         try {
         await CreateCoupon(newCoupon);
         setIsAddDrawerVisible(false);
-        notification.success({ message: 'Coupon added successfully' });
+        //notification.success({ message: 'Coupon added successfully' });
+        toast.success('Coupon added successfully');
+        mutate();
         } catch (error) {
         console.error(error);
-        notification.error({ message: 'Failed to add coupon' });
+        // notification.error({ message: 'Failed to add coupon' });
+        toast.error('Failed to add coupon: ' + error);
         }
     };
 
