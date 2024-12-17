@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FileText, Users, UserPlus, ChevronDown, ChevronLeft, ChevronRight, Package, PackageOpen, TicketPercent, CalendarHeart, BookUser, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles } from 'lucide-react';
+import { FileText, Users, UserPlus, ChevronDown, ChevronLeft, ChevronRight, Package, PackageOpen, TicketPercent, CalendarHeart, BookUser, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles, UserCog, BookUserIcon } from 'lucide-react';
 import { LayoutDashboardIcon } from 'lucide-react';
 import { Tags, Slack } from 'lucide-react';
 import { BgColorsOutlined } from '@ant-design/icons';
@@ -238,8 +238,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-indigo-500 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-indigo-900" onClick={() => handleDropdownClick('users')}>
                 <div className="flex items-center cursor-pointer">
-                  <Users className="mr-2" />
-                  {!isCollapsed && 'Users'}
+                  <BookUserIcon className="mr-2" />
+                  {!isCollapsed && 'Staffs'}
                 </div>
                 {!isCollapsed && (
                   <div className={`transform transition-transform duration-300 ${openDropdown === 'users' ? 'rotate-180' : 'rotate-0'}`}>
@@ -254,7 +254,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               >
                 <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-indigo-600 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                   <BookUser className="mr-2 rounded-md" />
-                  <Link href="/pages/manage-users/list-users">List Users</Link>
+                  <Link href="/staff/list-staff">Staffs List</Link>
                 </li>
                 
                 <li className=" p-2  rounded-lg hover:bg-indigo-600 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">

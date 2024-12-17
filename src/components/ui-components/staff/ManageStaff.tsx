@@ -5,47 +5,47 @@ import { Table, Button, Menu, Dropdown, Select, Input, Image, Tag, Modal, Form }
 import { Eye, Search, PencilIcon, Trash, BookmarkPlus, ChevronDown, Ban, Unlock, Pen } from "lucide-react";
 import useSWR from "swr";
 import useDebounce from "@/hooks/useDebounce";
-import { CustomerEntity, UpdateCustomer } from "@/types/entities/customer-entity";
-import { GetAllCustomers, DeleteCustomer, EditCustomer, BanCustomer, UnBanCustomer } from "@/services/customer-service";
+import { StaffEntity, UpdateStaff } from "@/types/entities/staff-entity";
+import { GetAllStaffs, DeleteStaff, EditStaff, BanStaff, UnBanStaff } from "@/services/staff-service";
 import { toast } from "react-toastify";
 import DetailDrawer from "@/components/shared/drawer/DetailDrawer";
 
-const ManageCustomers: React.FC = () => {
-  const { data: users, mutate, isLoading } = useSWR<CustomerEntity[]>("/customer", GetAllCustomers, {
+const ManageStaffs: React.FC = () => {
+  const { data: users, mutate, isLoading } = useSWR<StaffEntity[]>("/staff", GetAllStaffs, {
     fallbackData: [],
   });
 
-  const [selectedUser, setSelectedUser] = useState<CustomerEntity | null>(null);
+  const [selectedUser, setSelectedUser] = useState<StaffEntity | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editForm] = Form.useForm();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Filtered customers for search
-  const filteredCustomers = (users ?? []).filter((user: { FullName: string }) =>
+  // Filtered Staffs for search
+  const filteredStaffs = (users ?? []).filter((user: { FullName: string }) =>
     user.FullName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
 
-  // Handle Delete Customer
+  // Handle Delete Staff
   const handleDelete = async (userId: string) => {
     try {
-      await DeleteCustomer(userId);
+      await DeleteStaff(userId);
       mutate();
-      toast.success("Customer deleted successfully");
+      toast.success("Staff deleted successfully");
     } catch (error) {
-      toast.error("Failed to delete customer");
+      toast.error("Failed to delete Staff: " + error);
     }
   };
 
   // Handle View Details
-  const handleView = (user: CustomerEntity) => {
+  const handleView = (user: StaffEntity) => {
     setSelectedUser(user);
     setIsDrawerOpen(true);
   };
 
   // Handle Edit Modal Open
-  const handleEdit = (user: CustomerEntity) => {
+  const handleEdit = (user: StaffEntity) => {
     setSelectedUser(user);
     setIsEditModalOpen(true);
     
@@ -59,43 +59,43 @@ const ManageCustomers: React.FC = () => {
   // Submit Edit Form
   const handleEditSubmit = async () => {
     try {
-      const updatedValues: UpdateCustomer = await editForm.validateFields();
-      await EditCustomer(selectedUser?.Id ?? "", updatedValues);
+      const updatedValues: UpdateStaff = await editForm.validateFields();
+      await EditStaff(selectedUser?.Id ?? "", updatedValues);
       mutate();
-      toast.success("Customer updated successfully");
+      toast.success("Staff updated successfully");
       setIsEditModalOpen(false);
     } catch (error) {
-      toast.error("Failed to update customer: " + error);
+      toast.error("Failed to update Staff: " + error);
     }
   };
 
   const handleBan = async (userId: string) => {
     try {
-      await BanCustomer(userId);
+      await BanStaff(userId);
       mutate();
-      toast.success("Customer banned successfully!");
+      toast.success("Staff banned successfully!");
     } catch (error) {
-      toast.error("Failed to ban customer: " + error);
+      toast.error("Failed to ban Staff: " + error);
     }
   };
 
 const handleUnban = async (userId: string) => {
     try {
-    await UnBanCustomer(userId);
+    await UnBanStaff(userId);
     mutate();
-    toast.success("Unbanned customer successfully!");
+    toast.success("Unbanned Staff successfully!");
     } catch (error) {
-    toast.error("Failed to unlock customer: " + error);
+    toast.error("Failed to unlock Staff: " + error);
     }
 };
 
   // Table Columns
   const columns = [
     {
-      title: "Customer",
+      title: "Staff",
       dataIndex: "fullName",
       key: "fullName",
-      render: (text: string, user: CustomerEntity) => (
+      render: (text: string, user: StaffEntity) => (
         <div className="flex items-center">
           {user.ImageSource ? (
             <Image className="h-10 w-10 rounded-full" src={user.ImageSource} alt="" />
@@ -129,7 +129,7 @@ const handleUnban = async (userId: string) => {
     {
       title: "Status",
       key: "IsLocked",
-      render: (_: unknown, user: CustomerEntity) => (
+      render: (_: unknown, user: StaffEntity) => (
         <span>
             <Tag color={user.IsLocked ? "orange" : "green"}>{user.IsLocked ? "Banned" : "Active"}</Tag>
             <Tag color={user.IsDeleted ? "red" : "blue"}>{user.IsDeleted ? "Deleted" : "In use"}</Tag>
@@ -140,7 +140,7 @@ const handleUnban = async (userId: string) => {
     {
       title: "Actions",
       key: "actions",
-      render: (_: unknown, user: CustomerEntity) => (
+      render: (_: unknown, user: StaffEntity) => (
         <Dropdown
           overlay={
             <Menu>
@@ -159,7 +159,7 @@ const handleUnban = async (userId: string) => {
                     </Menu.Item>
                 ) : (
                     <Menu.Item onClick={() => handleBan(user.Id)}>
-                        <Ban className="mr-2 text-red-500" width={18} height={18} /> Ban customer
+                        <Ban className="mr-2 text-red-500" width={18} height={18} /> Ban Staff
                     </Menu.Item>
                 )}
             </Menu>
@@ -178,7 +178,7 @@ const handleUnban = async (userId: string) => {
       {/* Search and Add New */}
       <div className="flex flex-row space-x-2 mt-4 justify-between mb-8">
         <Input
-          placeholder="Search by customer name"
+          placeholder="Search by Staff name"
           onChange={(e) => setSearchTerm(e.target.value)}
           prefix={<Search />}
           className="w-2/3"
@@ -186,15 +186,15 @@ const handleUnban = async (userId: string) => {
         <Button
           type="primary"
           icon={<BookmarkPlus />}
-          onClick={() => (window.location.href = "/customer/add-customer")}
+          onClick={() => (window.location.href = "/Staff/add-Staff")}
         >
-          Add New Customer
+          Add New Staff
         </Button>
       </div>
 
       {/* Table */}
       <Table
-        dataSource={filteredCustomers}
+        dataSource={filteredStaffs}
         columns={columns}
         loading={isLoading}
         rowKey="Id"
@@ -205,9 +205,9 @@ const handleUnban = async (userId: string) => {
       {/* Detail Drawer */}
       <DetailDrawer user={selectedUser} isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
 
-      {/* Edit Customer Modal */}
+      {/* Edit Staff Modal */}
       <Modal
-        title={<div className="flex justify-center items-center mt-2 mb-4 space-x-2 border-b border-gray-300 p-1"><Pen/> <h2>Edit Customer</h2></div>}
+        title={<div className="flex justify-center items-center mt-2 mb-4 space-x-2 border-b border-gray-300 p-1"><Pen/> <h2>Edit Staff</h2></div>}
         open={isEditModalOpen}
         onCancel={() => setIsEditModalOpen(false)}
         onOk={handleEditSubmit}
@@ -241,4 +241,4 @@ const handleUnban = async (userId: string) => {
   );
 };
 
-export default ManageCustomers;
+export default ManageStaffs;

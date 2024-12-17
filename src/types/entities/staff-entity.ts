@@ -1,4 +1,4 @@
-export type CustomerEntity = {
+export type StaffEntity = {
     Id: string;
     FullName: string;
     Email: string;
@@ -10,7 +10,7 @@ export type CustomerEntity = {
     IsLocked: boolean;
 };
 
-export type CreateCustomer = {
+export type CreateStaff = {
     fullName: string;
     email: string;
     dateOfBirth: string;
@@ -19,7 +19,7 @@ export type CreateCustomer = {
     userClaimsRequest: number[];
 };
 
-export type UpdateCustomer = {
+export type UpdateStaff = {
     fullName: string;
     dateOfBirth: string;
     phoneNumber: string;
