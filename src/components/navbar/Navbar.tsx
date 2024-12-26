@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Button, Dropdown, Menu, Modal, Avatar, notification } from 'antd';
 import { UserOutlined, SettingOutlined, LogoutOutlined, QuestionCircleOutlined, DashboardOutlined, CalendarOutlined } from '@ant-design/icons';
 
@@ -21,6 +21,12 @@ const Navbar: React.FC = () => {
     const { data: session } = useSession();
     const user = session?.user;
     //console.log('userId', user?.id);
+    //console.log('role', user?.user.Role);
+    
+    useEffect(() => {
+        localStorage.setItem('role', user?.user.Role || '');
+    }, [user]);
+     console.log('role: ', localStorage.getItem('role'));
 
     
 
@@ -63,6 +69,9 @@ const Navbar: React.FC = () => {
 
     const userMenu = (
         <Menu>
+            <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
+                <span className='text-green-800'>{user?.user.FullName}</span>
+            </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
                 <Link href="/profile">Your Profile</Link>
             </Menu.Item>
@@ -109,10 +118,10 @@ const Navbar: React.FC = () => {
             <Dropdown overlay={shortcutsMenu} placement="bottomLeft" arrow>
                 <Button icon={<DashboardOutlined />} />
             </Dropdown>
-            <Dropdown className=' mr-52 border-2 border-gray-500 bg-white rounded-full justify-start items-center w-1/5' overlay={userMenu} placement="bottomLeft" arrow>
-                <div className="flex items-center cursor-pointer w-full">
+            <Dropdown className=' mr-52 border-2 border-gray-500 bg-white rounded-full justify-start items-center w-20 ' overlay={userMenu} placement="bottomLeft" arrow >
+                <div className="flex items-center cursor-pointer">
                     <Avatar src={user?.user.ImageSource || "/nextjs-logo.jpg"} />
-                    <span className="ml-2 text-nowrap text-yellow-800 font-semibold">{user?.user.FullName}</span>
+                    {/* <span className="ml-2 text-nowrap text-yellow-800 font-semibold">{user?.user.FullName}</span> */}
                 </div>
             </Dropdown>
         </div>

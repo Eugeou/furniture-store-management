@@ -56,8 +56,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
       </div>
       <nav className="flex-1">
         <ul>
-          {/* Only render for ADMIN */}
-          {role === 'ADMIN' && (
+          {/* Only render for Owner */}
+          {role === 'Owner' && (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-800">
                 <LayoutDashboardIcon className="mr-2" />
@@ -103,7 +103,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           )}
 
           {/* Product Link */}
-          {role === 'ADMIN' || role === 'STAFF' ? (
+          {role === 'Owner' || role === 'Staff' ? (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('product')}>
                 <div className="flex items-center cursor-pointer">
@@ -172,7 +172,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           ) : null}
 
           {/* Events Link */}
-          {role === 'ADMIN' || role === 'STAFF' ? (
+          {role === 'Owner' || role === 'Staff' ? (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('events')}>
                 <div className="flex items-center cursor-pointer">
@@ -200,7 +200,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           ) : null}
 
           {/* Customers Link */}
-          {role === 'ADMIN' || role === 'STAFF' ? (
+          {role === 'Owner' || role === 'Staff' ? (
             <>
               
 
@@ -234,7 +234,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           ) : null}
 
           {/* Staffs Link */}
-          {role === 'ADMIN' ? (
+          {role === 'Owner' ? (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('users')}>
                 <div className="flex items-center cursor-pointer">
@@ -254,19 +254,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               >
                 <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                   <BookUser className="mr-2 rounded-md" />
-                  <Link href="/staff/list-staff">Staffs List</Link>
+                  <Link href="/Staff/list-Staff">Staffs List</Link>
                 </li>
                 
                 <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                   <UserPlus className="mr-2" />
-                  <Link href="/staff/add-staff">Add Staff</Link>
+                  <Link href="/Staff/add-Staff">Add Staff</Link>
                 </li>
               </ul>
             </>
           ) : null}
 
           {/* Orders Link */}
-          {role === 'ADMIN' || role === 'STAFF' ? (
+          {role === 'Owner' || role === 'Staff' ? (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('orders')}>
             <div className="flex items-center cursor-pointer">
@@ -298,7 +298,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           ) : null}
 
           {/* Reports Link */}
-          {role === 'ADMIN' ? (
+          {role === 'Owner' ? (
             <>
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('reports')}>
               <div className="flex items-center cursor-pointer">

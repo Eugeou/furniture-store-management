@@ -16,6 +16,7 @@ import {motion} from 'framer-motion'
 import useSessionAuth from '@/hooks/useSessionAuth';
 import { toast } from 'react-toastify';
 // import { SessionProvider } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -33,18 +34,27 @@ const LoginPage: React.FC = () => {
 //     if (user) navigate('/brand')
 //   }, [user])
 
-  const { onLogin, isLoading } = useSessionAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
+  const { onLogin, isLoading} = useSessionAuth();
   const [form] = Form.useForm();
   const handleSubmit = async (values: StoreLogin) => {
     try {
       const result = await onLogin(values);
       console.log('result: ', result);
+      console.log('user: ', user);
+      if (user?.user.Role) {
+        localStorage.setItem('role', user.user.Role);
+      }
+      
       toast.success("Login successfully");
     } catch (error) {
       toast.error("Internal error during login " + error);
     }
     
   };
+  
+  console.log('role: ', localStorage.getItem('role'));
 
 
   return (

@@ -10,9 +10,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
 
   const router = useRouter();
-  useEffect(() => {
-    localStorage.setItem("role", "ADMIN");
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem("role", "ADMIN");
+  // }, []);
 
   return (
     <div className='flex flex-row min-h-screen justify-center items-center p-12 rounded-2xl' style={{backgroundColor: "#3b5d50"}}>
