@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Button, Drawer, Form, Input, DatePicker, notification, Skeleton, Image } from 'antd';
+import { Table, Modal, Button, Drawer, Form, Input, DatePicker, notification, Skeleton, Image, Select } from 'antd';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 
 import dayjs from 'dayjs';
@@ -16,6 +16,7 @@ import useSWR from 'swr';
 import useDebounce from '@/hooks/useDebounce';
 import { toast } from 'react-toastify';
 
+const { Option } = Select;
 const { RangePicker } = DatePicker;
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -253,6 +254,16 @@ const ManageCoupon: React.FC = () => {
                 <Form.Item name="dateRange" label="Date Range" rules={[{ required: true, validator: validateDates }]}>
                     <RangePicker className='border border-gray-500 rounded-lg hover:border-blue-500' />
                 </Form.Item>
+                <Form.Item
+                    name="ECouponType"
+                    label="Coupon Type"
+                    rules={[{ required: true, message: 'Please select the coupon type!' }]}
+                >
+                    <Select className='border border-gray-500 rounded-lg hover:border-blue-500'>
+                        <Option value="Percentage">Percentage</Option>
+                        <Option value="Value">Value</Option>
+                    </Select>
+                </Form.Item>
                 <Form.Item name="DiscountValue" label="Discount Value" rules={[{ required: true, message: 'Please input the discount value!' }]}>
                     <Input className='border border-gray-500 rounded-lg hover:border-blue-500' placeholder='%' type="number" min={1} max={100} />
                 </Form.Item>
@@ -260,9 +271,6 @@ const ManageCoupon: React.FC = () => {
                     <Input className='border border-gray-500 rounded-lg hover:border-blue-500' type="number" min={1}/>
                 </Form.Item>
                 <Form.Item name="Quantity" label="Quantity" rules={[{ required: true, message: 'Please input the quantity!' }]}>
-                    <Input className='border border-gray-500 rounded-lg hover:border-blue-500' type="number" min={1} />
-                </Form.Item>
-                <Form.Item name="ECouponType" label="Coupon type" rules={[{ required: true, message: 'Please input the quantity!' }]}>
                     <Input className='border border-gray-500 rounded-lg hover:border-blue-500' type="number" min={1} />
                 </Form.Item>
                 <Button type="primary" htmlType="submit">Update Coupon</Button>
@@ -282,6 +290,16 @@ const ManageCoupon: React.FC = () => {
             <Form.Item name="dateRange" label="Date Range" rules={[{ required: true, validator: validateDates }]}>
                 <RangePicker className='border border-gray-500 rounded-lg hover:border-blue-500 h-full' />
             </Form.Item>
+            <Form.Item
+            name="ECouponType"
+            label="Coupon Type"
+            rules={[{ required: true, message: 'Please select the coupon type!' }]}
+        >
+            <Select className='border border-gray-500 rounded-lg hover:border-blue-500'>
+                <Option value="Percentage">Percentage</Option>
+                <Option value="Value">Value</Option>
+            </Select>
+        </Form.Item>
             <Form.Item name="DiscountValue" label="Discount Value" rules={[{ required: true, message: 'Please input the discount value!' }]}>
                 <Input className='border border-gray-500 rounded-lg hover:border-blue-500' placeholder='%' type="number" min={1} max={100} />
             </Form.Item>
@@ -291,9 +309,7 @@ const ManageCoupon: React.FC = () => {
             <Form.Item name="Quantity" label="Quantity" rules={[{ required: true, message: 'Please input the quantity!' }]}>
                 <Input className='border border-gray-500 rounded-lg hover:border-blue-500' type="number" min={1} />
             </Form.Item>
-            <Form.Item name="ECouponType" label="Coupon Type" rules={[{ required: true, message: 'Please input the coupon type!' }]}>
-                <Input className='border border-gray-500 rounded-lg hover:border-blue-500' />
-            </Form.Item>
+
             <Button type="primary" htmlType="submit">Add Coupon</Button>
             </Form>
         </Drawer>
