@@ -18,18 +18,16 @@ export interface ImportInvoice {
 }
 
 
-
 export interface ImportItemResponse {
-    productItem: string;
-    quantity: number;
-    price: number;
-    total: number;
+    ProductVariantId: string;
+    ProductName: string;
+    Quantity: number;
+    Price: number;
+    Total: number;
 }
 
 export interface ImportDetailResponse {
-    importResponse: {
-        id: string;
-        total: number;
-    };
-    importItemResponseList: ImportItemResponse[];
+    Id : string;
+    Total: number;
+    ImportItemResponse: ImportItemResponse[];
 }

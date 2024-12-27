@@ -192,7 +192,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             >
               <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                 <ScrollText className="mr-2 rounded-md" />
-                <Link href="/import/import-product">List invoices</Link>
+                <Link href="/import/invoice">List invoices</Link>
               </li>
               
               <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">

@@ -1,5 +1,5 @@
 import axiosClient from "@/lib/axios";
-import { AddImportItem } from "@/types/entities/import-entity";
+import { AddImportItem, ImportDetailResponse } from "@/types/entities/import-entity";
 
 export const ImportProduct = async (data: AddImportItem[]) => {
 
@@ -13,6 +13,16 @@ export const ImportProduct = async (data: AddImportItem[]) => {
         const response = await axiosClient.post("/import", data, config);
         return response.data;
     } catch (error) {
+        throw error;
+    }
+}
+
+export const GetAllImport = async () : Promise<ImportDetailResponse[]> => {
+    try {
+        const response = await axiosClient.get("/import");
+        return response.data;
+    } catch (error) {
+        console.error(error);
         throw error;
     }
 }
