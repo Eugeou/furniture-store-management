@@ -53,6 +53,7 @@ const ManageOrders: React.FC = () => {
     setStatusChanging(true);
     try {
       await ChangeOrderStatus(orderId, status);
+      console.log('Status:', status);
       message.success('Order status updated successfully!');
       mutate(); // Refresh the orders data
     } catch (error) {
@@ -83,6 +84,12 @@ const ManageOrders: React.FC = () => {
       dataIndex: 'Email',
       key: 'Email',
       ellipsis: true,
+      filters: [
+        { text: 'gmail.com', value: 'gmail.com' },
+        { text: 'yahoo.com', value: 'yahoo.com' },
+        { text: 'outlook.com', value: 'outlook.com' },
+      ],
+      onFilter: (value, record) => record.Email.includes(value as string),
     },
     {
       title: 'Payment Method',
@@ -141,12 +148,14 @@ const ManageOrders: React.FC = () => {
           <Select
             style={{ width: 120 }}
             placeholder="Change Status"
-            onChange={(value) => handleChangeStatus(record.Id, value)}
+            onChange={(value: number) => handleChangeStatus(record.Id, value)}
             loading={statusChanging}
           >
-            <Option value={0}>Cancel</Option>
+            <Option value={0}>Pending</Option>
             <Option value={1}>Paid</Option>
-            <Option value={2}>Pending</Option>
+            <Option value={2}>Confirmed</Option>
+            <Option value={3}>Canceled</Option>
+            <Option value={6}>Completed</Option>
           </Select>
         </div>
       ),
@@ -159,7 +168,6 @@ const ManageOrders: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4">Manage Orders</h1>
       
       {/* Orders Table */}
       <Table<OrderEntity>
