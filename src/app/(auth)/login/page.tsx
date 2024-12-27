@@ -50,13 +50,14 @@ const LoginPage: React.FC = () => {
       }
       
       toast.success("Login successfully");
-      if (user.user.Role === 'Owner') {
-        navigate('/dashboard');
+      // if (user?.user.Role === 'Owner') {
+      //   navigate('/dashboard');
 
-      }
-      else if (user.user.Role === 'Staff') {
-        navigate('/customer');
-      }
+      // }
+      // else if (user?.user.Role === 'Staff') {
+      //   navigate('/customer');
+      // }
+      navigate('/report/daily-report');
     } catch (error) {
       toast.error("Internal error during login " + error);
     }
