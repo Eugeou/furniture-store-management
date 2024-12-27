@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
   // Nếu người dùng đã đăng nhập và cố truy cập /login, chuyển hướng sang dashboard
   if (token && request.nextUrl.pathname.startsWith("/login")) {
     console.log("Redirect from /login to / because user already logged in");
-    //return NextResponse.redirect(new URL("/brand", request.url));
+    //return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   // Nếu người dùng chưa đăng nhập và cố truy cập route bảo vệ, chuyển hướng sang login

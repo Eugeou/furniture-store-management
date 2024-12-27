@@ -107,7 +107,7 @@ const ManageOrders: React.FC = () => {
 
         switch (status) {
           case 'Canceled':
-            statusText = 'Cancel';
+            statusText = 'Canceled';
             color = 'text-red-500';
             break;
           case 'Refund':
@@ -127,8 +127,8 @@ const ManageOrders: React.FC = () => {
             color = 'text-green-500';
             break;
           case 'Completed':
-            statusText = 'Complete';
-            color = 'text-green-500';
+            statusText = 'Completed';
+            color = 'text-blue-500';
             break;
           default:
             statusText = 'Pending';
