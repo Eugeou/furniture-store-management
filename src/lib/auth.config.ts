@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import envConfig from "@/configs/config";
 
 
-const BASE_URL = envConfig.NEXT_PUBLIC_API_ENDPOINT || "http://localhost:5001/api/v1";
+const BASE_URL = envConfig.NEXT_PUBLIC_API_ENDPOINT || "https://localhost:5001/api/v1";
 
 export interface SessionAuth {
   accessToken: string;
@@ -30,7 +30,7 @@ export const authOptions = {
           const { data } = await axios.post<
             StoreLogin,
             AxiosResponse<{ data: StoreUser }>
-          >(`${BASE_URL}/auth/signin`, {
+          >(`https://localhost:5001/api/v1/auth/signin`, {
             email: credentials.email,
             password: credentials.password,
           });
