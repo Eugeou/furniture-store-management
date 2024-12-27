@@ -17,10 +17,12 @@ import useSessionAuth from '@/hooks/useSessionAuth';
 import { toast } from 'react-toastify';
 // import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const LoginPage: React.FC = () => {
+  const navigate = useRouter().push;
   // const { onLogin, isLoading } = useAuth()
 
   // const [form] = Form.useForm()
@@ -48,6 +50,7 @@ const LoginPage: React.FC = () => {
       }
       
       toast.success("Login successfully");
+      navigate('/brand');
     } catch (error) {
       toast.error("Internal error during login " + error);
     }

@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
             setLoading(true);
             try {
                 await logout(userId);
-                //localStorage.clear();
+                localStorage.clear();
                 window.location.href = "/login";
                 sessionStorage.clear();
                 toast.success("Logout successfully");

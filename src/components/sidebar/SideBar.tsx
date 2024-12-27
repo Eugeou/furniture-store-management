@@ -64,6 +64,38 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 {!isCollapsed && <Link href="/pages/dashboard">Dashboard</Link>}
               </li>
 
+              {/* Orders Link */}
+            {role === 'Owner' || role === 'Staff' ? (
+              <>
+                <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('orders')}>
+              <div className="flex items-center cursor-pointer">
+                <ListOrdered className="mr-2" />
+                {!isCollapsed && 'Orders'}
+              </div>
+              {!isCollapsed && (
+                <div className={`transform transition-transform duration-300 ${openDropdown === 'orders' ? 'rotate-180' : 'rotate-0'}`}>
+                  <ChevronDown />
+                </div>
+              )}
+            </li>
+            <ul
+              className={`pl-8 m-2 transition-max-height duration-300 ease-in-out focus:outline-none  overflow-hidden ${
+                openDropdown === 'orders' && !isCollapsed ? 'max-h-64' : 'max-h-0'
+              }`}
+            >
+              <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
+                <ListOrdered className="mr-2 rounded-md" />
+                <Link href="/order">List orders</Link>
+              </li>
+              
+              <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
+                <FilePlus className="mr-2" />
+                <Link href="/pages/orders/create-order">Create order</Link>
+              </li>
+            </ul>
+              </>
+            ) : null}
+
               {/*Category Link */}
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('category')}>
                 <div className="flex items-center cursor-pointer">
@@ -265,37 +297,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             </>
           ) : null}
 
-          {/* Orders Link */}
-          {role === 'Owner' || role === 'Staff' ? (
-            <>
-              <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('orders')}>
-            <div className="flex items-center cursor-pointer">
-              <ListOrdered className="mr-2" />
-              {!isCollapsed && 'Orders'}
-            </div>
-            {!isCollapsed && (
-              <div className={`transform transition-transform duration-300 ${openDropdown === 'orders' ? 'rotate-180' : 'rotate-0'}`}>
-                <ChevronDown />
-              </div>
-            )}
-          </li>
-          <ul
-            className={`pl-8 m-2 transition-max-height duration-300 ease-in-out focus:outline-none  overflow-hidden ${
-              openDropdown === 'orders' && !isCollapsed ? 'max-h-64' : 'max-h-0'
-            }`}
-          >
-            <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
-              <ListOrdered className="mr-2 rounded-md" />
-              <Link href="/pages/orders/list-orders">List orders</Link>
-            </li>
-            
-            <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
-              <FilePlus className="mr-2" />
-              <Link href="/pages/orders/create-order">Create order</Link>
-            </li>
-          </ul>
-            </>
-          ) : null}
+          
 
           {/* Reports Link */}
           {role === 'Owner' ? (

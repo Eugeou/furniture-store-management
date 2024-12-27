@@ -16,6 +16,7 @@ const ManageBrand: React.FC = () => {
     const [form] = Form.useForm();
 
     console.log('access token', localStorage.getItem("accessToken"));
+    console.log('role', localStorage.getItem("role"));
 
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
