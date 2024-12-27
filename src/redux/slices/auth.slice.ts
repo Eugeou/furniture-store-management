@@ -19,7 +19,8 @@ const initialState: AuthState = {
 //Generated pending, fulfilled and rejected action type automatically
 export const getUser = createAsyncThunk('user/getUser', async (_param: string | undefined, { rejectWithValue }) => {
   try {
-    return await GetMe()
+    const userId = localStorage.getItem('userId')
+    return await GetMe( userId || '')
   } catch (error) {
     return rejectWithValue(error) 
     //error?.response?.data?.message || error.message
