@@ -83,12 +83,12 @@ export const logout = async (userId: string)=> {
   return data;
 }
 
-export const GetMe = async ()=> {
-  const { data } = await axiosClient.get(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/auth/me', {
-    baseURL: envConfig.NEXT_PUBLIC_API_ENDPOINT
-  })
-  return data
-}
+// export const GetMe = async ()=> {
+//   const { data } = await axiosClient.get(envConfig.NEXT_PUBLIC_API_ENDPOINT + '/auth/me', {
+//     baseURL: envConfig.NEXT_PUBLIC_API_ENDPOINT
+//   })
+//   return data
+// }
   
 export const refreshTokenService = async (refreshToken: string, userId: string): Promise<{ access: string }> => {
   const { data } = await axios.post<{ access: string }>(
@@ -98,6 +98,16 @@ export const refreshTokenService = async (refreshToken: string, userId: string):
       baseURL: envConfig.NEXT_PUBLIC_API_ENDPOINT
     }
   )
+  return data
+}
+
+export const GetMe = async (id : string)=> {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const { data } = await axiosClient.post('/auth/me', JSON.stringify(id), config)
   return data
 }
 
