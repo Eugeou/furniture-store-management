@@ -49,7 +49,7 @@ const ManageOrders: React.FC = () => {
    * @param orderId - ID of the order
    * @param status - New status value
    */
-  const handleChangeStatus = async (orderId: string, status: number) => {
+  const handleChangeStatus = async (orderId: string, status: string) => {
     setStatusChanging(true);
     try {
       await ChangeOrderStatus(orderId, status);
@@ -110,8 +110,24 @@ const ManageOrders: React.FC = () => {
             statusText = 'Cancel';
             color = 'text-red-500';
             break;
+          case 'Refund':
+            statusText = 'Refund';
+            color = 'text-red-500';
+            break;
+          case 'ReturnGoods':
+            statusText = 'Return';
+            color = 'text-red-500';
+            break;
+          case 'Confirmed':
+            statusText = 'Confirmed';
+            color = 'text-green-500';
+            break;
           case 'Paid':
             statusText = 'Paid';
+            color = 'text-green-500';
+            break;
+          case 'Completed':
+            statusText = 'Complete';
             color = 'text-green-500';
             break;
           default:
@@ -148,14 +164,14 @@ const ManageOrders: React.FC = () => {
           <Select
             style={{ width: 120 }}
             placeholder="Change Status"
-            onChange={(value: number) => handleChangeStatus(record.Id, value)}
+            onChange={(value: string) => handleChangeStatus(record.Id, value)}
             loading={statusChanging}
           >
-            <Option value={0}>Pending</Option>
-            <Option value={1}>Paid</Option>
-            <Option value={2}>Confirmed</Option>
-            <Option value={3}>Canceled</Option>
-            <Option value={6}>Completed</Option>
+            <Option value={"Pending"}>Pending</Option>
+            <Option value={"Paid"}>Paid</Option>
+            <Option value={"Confirmed"}>Confirmed</Option>
+            <Option value={"Canceled"}>Canceled</Option>
+            <Option value={"Completed"}>Completed</Option>
           </Select>
         </div>
       ),

@@ -29,3 +29,10 @@ export type AddressEntity = {
     PostalCode: string;
     IsDefault: boolean;
 }
+
+export type OrderStatus = {
+    EOrderStatus: string;
+    Note?: string;
+    Images?: File[];
+    ShipperId?: string;
+}
