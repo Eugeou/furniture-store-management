@@ -7,5 +7,5 @@ export const GetAllOrders = async (): Promise<OrderEntity[]> => {
 }
 
 export const ChangeOrderStatus = async (id: string, EOrderStatus: number) => {
-    return await axiosClient.put(`/order/${id}/status`, EOrderStatus);
+    return await axiosClient.put(`/order/${id}/status`, {EOrderStatus: EOrderStatus});
 }
