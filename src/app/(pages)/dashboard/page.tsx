@@ -8,7 +8,7 @@ const DashBoard = dynamic(() => import("@/components/ui-components/dashboard/Das
   ssr: false,
 });
 
-const ManageBrandPage: React.FC = () => {
+const DashboardPage : React.FC = () => {
 
 
   return (
@@ -24,4 +24,4 @@ const ManageBrandPage: React.FC = () => {
   );
 };
 
-export default ManageBrandPage;
+export default DashboardPage;

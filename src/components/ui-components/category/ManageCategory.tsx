@@ -89,19 +89,19 @@ const ManageCategory: React.FC = () => {
                 <Tag color="orange">{record.CategoryName}</Tag>
             ),
         },
-        {
-            title: "Room Space",
-            key: "RoomSpace",
-            render: (_: unknown, record: Category) => {
-                const furnitypes = Furnitypes?.find((furnitype) => furnitype.Id === record.FurnitureTypeId);
-                return furnitypes ? (
-                    <div className="flex items-center space-x-2">
-                        <Image src={furnitypes.ImageSource || "/faq.png"} alt="RoomSpace" width={40} height={40} />
-                        <span>{furnitypes.FurnitureTypeName}</span>
-                    </div>
-                ) : null;
-            },
-        },
+        // {
+        //     title: "Room Space",
+        //     key: "RoomSpace",
+        //     render: (_: unknown, record: Category) => {
+        //         const furnitypes = Furnitypes?.find((furnitype) => furnitype.Id === record.FurnitureTypeId);
+        //         return furnitypes ? (
+        //             <div className="flex items-center space-x-2">
+        //                 <Image src={furnitypes.ImageSource || "/faq.png"} alt="RoomSpace" width={40} height={40} />
+        //                 <span>{furnitypes.FurnitureTypeName}</span>
+        //             </div>
+        //         ) : null;
+        //     },
+        // },
         {
             title: "Description",
             dataIndex: "Description",
@@ -154,6 +154,7 @@ const ManageCategory: React.FC = () => {
                     type="primary"
                     icon={<BookmarkPlus />}
                     className="font-semibold shadow-lg h-10"
+                    style={{ backgroundColor: "#3b5d50" }}
                     onClick={() => setIsAddModalVisible(true)}
                 >
                     Add new Category
@@ -199,7 +200,7 @@ const ManageCategory: React.FC = () => {
                             <Button icon={<UploadIcon />}></Button>
                         </Upload>
                     </Form.Item>
-                    <Form.Item name="FurnitureTypeId" label="Furniture Type" rules={[{ required: true }]}>
+                    {/* <Form.Item name="FurnitureTypeId" label="Furniture Type" rules={[{ required: true }]}>
                         <Select
                             placeholder="Select Furniture Type"
                             options={Furnitypes?.map(furnitype => ({
@@ -212,7 +213,7 @@ const ManageCategory: React.FC = () => {
                                 ),
                             }))}
                         />
-                    </Form.Item>
+                    </Form.Item> */}
                 </Form>
             </Modal>
 

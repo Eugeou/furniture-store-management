@@ -129,7 +129,7 @@ const ManageMaterial: React.FC = () => {
                     className="w-2/3 h-10 border border-gray-300 rounded-lg shadow-lg" 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}/>
-                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg h-10" onClick={() => setIsAddModalVisible(true)}>
+                <Button type="primary" icon={<BookmarkPlus />} className="font-semibold shadow-lg h-10" onClick={() => setIsAddModalVisible(true)} style={{backgroundColor: "#3b5d50"}}>
                     Add new Material
                 </Button>
             </div>

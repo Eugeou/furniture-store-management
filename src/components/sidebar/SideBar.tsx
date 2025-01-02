@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FileText, Users, UserPlus, ChevronDown, ChevronLeft, ChevronRight, Package, PackageOpen, TicketPercent, CalendarHeart, BookUser, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Sofa, Proportions, WandSparkles, UserCog, BookUserIcon } from 'lucide-react';
+import { FileText, Users, UserPlus, ChevronDown, ChevronLeft, ChevronRight, Package, PackageOpen, TicketPercent, CalendarHeart, BookUser, ScrollText, Import, PieChart, Blocks, ListOrdered, FilePlus, LineChart, TrendingUp, Proportions, WandSparkles, BookUserIcon, Layers } from 'lucide-react';
 import { LayoutDashboardIcon } from 'lucide-react';
 import { Tags, Slack } from 'lucide-react';
 import { BgColorsOutlined } from '@ant-design/icons';
@@ -99,8 +99,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               {/*Category Link */}
               <li className="p-4 mb-2 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center justify-between transition duration-500 ease-out focus:outline-none active:bg-green-900" onClick={() => handleDropdownClick('category')}>
                 <div className="flex items-center cursor-pointer">
-                  <Sofa className="mr-2" />
-                  {!isCollapsed && 'Furniture type'}
+                  <Layers className="mr-2" />
+                  {!isCollapsed && 'Clothes type'}
                 </div>
                 {!isCollapsed && (
                   <div className={`transform transition-transform duration-300 ${openDropdown === 'category' ? 'rotate-180' : 'rotate-0'}`}>
@@ -126,10 +126,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   <Slack className="mr-2" />
                   <Link href="/category">Category</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
-                  <Sofa className="mr-2" />
-                  <Link href="/furniture-type">Furniture Type</Link>
-                </li>
+                {/* <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
+                  <Layers className="mr-2" />
+                  <Link href="/furniture-type">Clothes Type</Link>
+                </li> */}
               </ul>
             </>
           )}
@@ -162,10 +162,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   <Blocks className="mr-2" />
                   <Link href="/material">Materials</Link>
                 </li>
-                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
+                {/* <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <WandSparkles className="mr-2" />
                   <Link href="/designer">Designer</Link>
-                </li>
+                </li> */}
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <PackageOpen className="mr-2" />
                   <Link href="/product/list-product">Products list</Link>

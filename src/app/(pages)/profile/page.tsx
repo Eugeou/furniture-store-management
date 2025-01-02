@@ -8,16 +8,16 @@ import { ChangeAvatar } from '@/services/user-service';
 import { EditCustomer } from '@/services/customer-service';
 import { GetMe } from '@/services/auth-service';
 import moment from 'moment';
-import { useSession } from 'next-auth/react';
+//import { useSession } from 'next-auth/react';
 
 
 // Fetcher function for useSWR
 
 const ProfilePage: React.FC = () => {
   // Retrieve userId from localStorage
-  const { data: session } = useSession();
-  const users = session?.user;
-  const userId = users?.user.Id;
+  // const { data: session } = useSession();
+  // const users = session?.user;
+  const userId = localStorage.getItem('userId');
 
   const [thumbnail, setThumbnail] = useState<File | null>(null);
 

@@ -209,12 +209,13 @@ const ManageInvoice: React.FC = () => {
         dataSource={filteredImports}
         rowKey="Id"
         pagination={{ pageSize: 10 }}
-        className="bg-white shadow rounded-lg"
+        className="bg-white shadow rounded-lg border border-gray-300"
         expandable={{
           expandedRowRender: (record) => (
             <div className="p-4 bg-gray-50">
               {record.ImportItemResponse.length > 0 ? (
                 <Table<ImportItemResponse>
+                  
                   dataSource={record.ImportItemResponse}
                   columns={[
                     {
@@ -248,7 +249,7 @@ const ManageInvoice: React.FC = () => {
                   ]}
                   pagination={false}
                   rowKey={(item) => item.ProductVariantId + item.Price}
-                  className="bg-white shadow rounded-lg"
+                  className="bg-white shadow rounded-lg border border-gray-300"
                 />
               ) : (
                 <p className="text-gray-500">No Data</p>

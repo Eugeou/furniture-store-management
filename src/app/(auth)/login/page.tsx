@@ -28,16 +28,24 @@ const LoginPage: React.FC = () => {
   const navigate = useRouter().push;
   const { onLogin, isLoading } = useAuth()
 
+  const { user } = useAppSelector(selectAuth)
+  const userId = localStorage.getItem('userId');
+
+  console.log('user: ', user);
+  //const navigate = useRouter().push
+  useEffect(() => {
+    if (userId) navigate('/report/daily-report')
+  }, [userId])
+
   const [form] = Form.useForm()
   const handleSubmit = async (values: StoreLogin) => {
     await onLogin(values)
     console.log('values: ', values , 'isLoading: ', isLoading)
+    // if (userId) 
+    //   navigate('/report/daily-report')
+
   }
-  const { user } = useAppSelector(selectAuth)
-  //const navigate = useRouter().push
-  // useEffect(() => {
-  //   if (user) navigate('/report/daily-report')
-  // }, [user])
+  
 
   // const { data: session } = useSession();
   // const user = session?.user;
@@ -66,24 +74,26 @@ const LoginPage: React.FC = () => {
   //   }
     
   // };
+
+  console.log('userId: ', localStorage.getItem('userId'));
   
   console.log('role: ', localStorage.getItem('role'));
 
 
   return (
     
-      <div className='login-page w-screen h-screen flex justify-center items-center backdrop-blur-md bg-[url("/login-bg.png")] bg-center bg-no-repeat flex-col gap-14 p-24'>
+      <div className='login-page w-screen h-screen flex justify-center items-center backdrop-blur-md /*bg-[url("/login-bg.png")]*/ bg-center bg-no-repeat flex-col gap-14 p-24' style={{backgroundColor: "#3b5d50" }}>
         {isLoading && <AppLoading />}
-        <div className='shadow-xl rounded-3xl p-8 bg-opacity-45 bg-blue-600 backdrop-blur '>
+        <div className='shadow-xl rounded-3xl p-8 bg-white backdrop-blur '>
           <Row gutter={[12, 12]}>
             <Col span={24} className='flex flex-col justify-center items-center'>
-              <h1 className='text-3xl font-bold text-center text-white'>Login</h1>
+              <h1 className='text-3xl font-bold text-center text-green-700'>Login</h1>
               <Form form={form} onFinish={handleSubmit} layout='vertical'>
                 <Row gutter={[12, 12]}>
                   <Col span={24}>
                   <Form.Item 
                       name='email' 
-                      label= {<h2 className='font-semibold text-lg text-white'>User name (Email)</h2>}
+                      label= {<h2 className='font-semibold text-lg text-green-700'>User name (Email)</h2>}
                       rules={[{ required: true, message: 'Vui lòng nhập username' }]}>
                     <motion.div
                         whileHover={{ scale: 1.01 }}
@@ -97,7 +107,7 @@ const LoginPage: React.FC = () => {
                   <Col span={24}>
                   <Form.Item 
                       name='password' 
-                      label= {<h2 className='font-semibold text-lg text-white'>Password</h2>}
+                      label= {<h2 className='font-semibold text-lg text-green-700'>Password</h2>}
                       rules={[{ required: true, message: 'Vui lòng nhập password' }]}>
 
                     <motion.div
@@ -113,7 +123,7 @@ const LoginPage: React.FC = () => {
 
                   </Form.Item>
                   <Link href='/forgot-password'>
-                    <Typography.Text className='text-lg text-white underline'>Forgot password</Typography.Text>
+                    <Typography.Text className='text-lg text-green-800 underline'>Forgot password</Typography.Text>
                   </Link>
                   </Col>
 
@@ -127,10 +137,10 @@ const LoginPage: React.FC = () => {
                       <Button
                         type='primary'
                         htmlType='submit'
-                        className='w-full p-6 hover:bg-[#85cfed] bg-blue-900'
+                        className='w-full p-6 hover:bg-[#3b5d50] bg-green-900'
                         loading={isLoading}
                       >
-                        <Typography.Text className='text-xl font-semibold text-white'>Đăng nhập</Typography.Text>
+                        <Typography.Text className='text-xl font-semibold text-white'>Submit</Typography.Text>
                       </Button>
                       </motion.div>
                   </Col>

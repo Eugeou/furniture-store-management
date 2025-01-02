@@ -58,14 +58,17 @@ export function useAuth() {
       console.log("Data: ", response.data)
       if (response.data.data?.AccessToken) {
         dispatch(setToken(response.data.data))
-        localStorage.setItem('role', response.data.Role)
+        localStorage.setItem('accessToken', response.data.data.AccessToken)
+        //console.log('Message:', response.data.data.message)
+        localStorage.setItem('role', response.data.data.Role)
         localStorage.setItem('userId', response.data.data.UserId)
       }
 
-      toast.success('Đăng nhập thành công')
-      console.log(token)
+      toast.success('Đăng nhập thành công!')
+      //console.log(token)
       callbackSuccess?.()
       navigate('/report/daily-report')
+      //window.location.href = '/report/daily-report'
     } catch (err: unknown) {
       console.log(err)
       //toast.error(err?.response?.data?.message || err?.message)

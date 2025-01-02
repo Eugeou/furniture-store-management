@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
-import { Form, DatePicker, Tabs, Card, Row, Col } from 'antd';
+import { Form, Card, Row, Col } from 'antd';
 import moment from 'moment';
 import { GetTotalRevenueReport } from '@/services/report-service';
 
-import { Line } from '@ant-design/charts';
+//import { Line } from '@ant-design/charts';
 import { ArrowRight, BarChart, Coins, ListOrdered,  PackageCheck, PieChart, Slack, Ticket, UserPen, Users, UsersIcon } from 'lucide-react';
 import useSWR from 'swr';
 import { GetAllDesigner } from '@/services/designer-service';

@@ -102,12 +102,12 @@ export const refreshTokenService = async (refreshToken: string, userId: string):
 }
 
 export const GetMe = async (id : string)=> {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const { data } = await axiosClient.post('/auth/me', JSON.stringify(id), config)
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  const { data } = await axiosClient.post(`/auth/me/${id}`)
   return data
 }
 

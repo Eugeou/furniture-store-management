@@ -138,6 +138,7 @@ const ManageColor: React.FC = () => {
         <Button
           type="primary"
           className="font-semibold shadow-lg h-10"
+          style={{ backgroundColor: '#3b5d50' }}
           icon={<BookmarkPlus />}
           onClick={handleOpenAddModal}
         >

@@ -13,26 +13,27 @@ const axiosClient = axios.create({
   baseURL: envConfig.NEXT_PUBLIC_API_ENDPOINT,
 })
 
-// axiosClient.interceptors.request.use(function (config: InternalAxiosRequestConfig) {
-//   const token = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : ''
-//   if (token) config.headers.Authorization = `Bearer ${token}`
-//   return config
+axiosClient.interceptors.request.use(function (config: InternalAxiosRequestConfig) {
+  const token = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : ''
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
   
-// })
+})
 
-axiosClient.interceptors.request.use(
-  async (config) => {
-    const session = await getSession();
-    //console.log('session', session?.accessToken) 
-    if (session?.accessToken) {
-      config.headers.Authorization = `Bearer ${session.accessToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// axiosClient.interceptors.request.use(
+//   async (config) => {
+//     const session = await getSession();
+//     //console.log('session', session?.accessToken) 
+//     if (session?.accessToken) {
+//       config.headers.Authorization = `Bearer ${session.accessToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
 axiosClient.interceptors.response.use(
   (response) => response.data,
   async (error) => {

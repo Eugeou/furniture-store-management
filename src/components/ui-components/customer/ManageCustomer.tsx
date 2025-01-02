@@ -187,6 +187,7 @@ const handleUnban = async (userId: string) => {
           type="primary"
           icon={<BookmarkPlus />}
           onClick={() => (window.location.href = "/customer/add-customer")}
+          style={{ backgroundColor: "#3b5d50" }}
         >
           Add New Customer
         </Button>

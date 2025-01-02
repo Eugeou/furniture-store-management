@@ -1,9 +1,10 @@
 export type ProductVariant = {
     colorId: string;
-    length: number;
-    width: number;
-    height: number;
-    quantity: number;
+    sizeId: string;
+    // length: number;
+    // width: number;
+    // height: number;
+    // quantity: number;
     price: number;
     images: File[];
   };
@@ -25,10 +26,10 @@ export type ProductVariant = {
     Id: string;
     ProductName: string;
     Unit: string;
-    Description: string;
+    Description: string; 
     BrandName: string;
     CategoryName: string;
-    Designers: string[];
+    //Designers?: string[];
     Materials: string[];
     DisplayPrice: string;
     Discount?: number;
@@ -40,7 +41,9 @@ export type ProductVariant = {
     Id: string;
     ColorId: string;
     ColorName: string;
-    DisplayDimension: string;
+    SizeId: string;
+    SizeName: string;
+    //DisplayDimension: string;
     Quantity: number;
     Price: number;
     ImageSource: string[];

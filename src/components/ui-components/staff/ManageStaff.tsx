@@ -187,6 +187,7 @@ const handleUnban = async (userId: string) => {
           type="primary"
           icon={<BookmarkPlus />}
           onClick={() => (window.location.href = "/staff/add-staff")}
+          style={{ backgroundColor: "#3b5d50" }}
         >
           Add New Staff
         </Button>

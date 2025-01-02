@@ -91,7 +91,7 @@ const DailyReport: React.FC = () => {
                                 }}
                             />
 
-                            <Button className='flex justify-center items-center space-x-1 h-10 font-semibold' type="primary" onClick={handleGenerateReport} icon={<LineChart/>}>Generate Report</Button>
+                            <Button className='flex justify-center items-center space-x-1 h-10 font-semibold' style={{backgroundColor: "#3b5d50"}} type="primary" onClick={handleGenerateReport} icon={<LineChart/>}>Generate Report</Button>
                         </div>
                     </Form.Item>
                     
@@ -148,7 +148,7 @@ const DailyReport: React.FC = () => {
                                 }}
                             />
 
-                            <Button className='flex justify-center items-center space-x-1 h-10 font-semibold' type="primary" icon={<LineChart/>} onClick={handleGenerateReport}>Generate Report</Button>
+                            <Button className='flex justify-center items-center space-x-1 h-10 font-semibold' style={{backgroundColor: "#3b5d50"}} type="primary" icon={<LineChart/>} onClick={handleGenerateReport}>Generate Report</Button>
                         </div>
                     </Form.Item>
                     

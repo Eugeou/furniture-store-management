@@ -11,6 +11,7 @@ import { GetAllCategory } from '@/services/category-service';
 import { GetAllDesigner } from '@/services/designer-service';
 import { GetAllMaterial } from '@/services/material-service';
 import { GetAllColors } from '@/services/color-service';
+import { GetAllSize } from '@/services/size-service';
 import { UploadIcon } from 'lucide-react';
 
 const CreateProduct: React.FC = () => {
@@ -22,22 +23,26 @@ const CreateProduct: React.FC = () => {
 
   const { data: brands } = useSWR('/brand', GetAllBrand, { fallbackData: [] });
   const { data: categories } = useSWR('/category', GetAllCategory, { fallbackData: [] });
-  const { data: designers } = useSWR('/designer', GetAllDesigner, { fallbackData: [] });
+  // const { data: designers } = useSWR('/designer', GetAllDesigner, { fallbackData: [] });
   const { data: materials } = useSWR('/material', GetAllMaterial, { fallbackData: [] });
   const { data: colors } = useSWR('/color', GetAllColors, { fallbackData: [] });
+  const { data: sizes } = useSWR('/size', GetAllSize, { fallbackData: [] });
+
+  console.log('sizes', sizes);
 
   const handleAddVariant = () => {
-    if (!currentVariant.colorId || !currentVariant.images?.length) {
+    if (!currentVariant.colorId || !currentVariant.images?.length || !currentVariant.sizeId) {
       toast.error('Product Color and Images are required for a variant.');
       return;
     }
 
     const newVariant: ProductVariant = {
       colorId: currentVariant.colorId,
-      length: currentVariant.length ?? 0,
-      width: currentVariant.width ?? 0,
-      height: currentVariant.height ?? 0,
-      quantity: currentVariant.quantity ?? 0,
+      sizeId: currentVariant.sizeId,
+      // length: currentVariant.length ?? 0,
+      // width: currentVariant.width ?? 0,
+      // height: currentVariant.height ?? 0,
+      // quantity: currentVariant.quantity ?? 0,
       price: currentVariant.price ?? 0,
       images: currentVariant.images,
     };
@@ -88,10 +93,21 @@ const CreateProduct: React.FC = () => {
           )
       )
     },
-    { title: 'Length', dataIndex: 'length', key: 'length' },
-    { title: 'Width', dataIndex: 'width', key: 'width' },
-    { title: 'Height', dataIndex: 'height', key: 'height' },
-    { title: 'Quantity', dataIndex: 'quantity', key: 'quantity' },
+    { title: 'Size', dataIndex: 'sizeId', key: 'sizeId',
+      render: (_: any, record: ProductVariant) => (
+        sizes?.map((size) => {
+          if (size.Id === record.sizeId) {
+            return <Tag>{size.SizeName}</Tag>;
+          }
+        }
+        )
+      )
+    },
+    // { title: 'Material', dataIndex: 'materialId', key: 'materialId' },
+    // { title: 'Length', dataIndex: 'length', key: 'length' },
+    // { title: 'Width', dataIndex: 'width', key: 'width' },
+    // { title: 'Height', dataIndex: 'height', key: 'height' },
+    // { title: 'Quantity', dataIndex: 'quantity', key: 'quantity' },
     { title: 'Price', dataIndex: 'price', key: 'price' },
     {
       title: 'Actions',
@@ -132,13 +148,13 @@ const CreateProduct: React.FC = () => {
           <Select placeholder="Select a category" options={categories?.map((category) => ({ label: category.CategoryName, value: category.Id }))} />
         </Form.Item>
 
-        <Form.Item name="DesignersId" label="Designers" rules={[{ required: true }]}>
+        {/* <Form.Item name="DesignersId" label="Designers" rules={[{ required: true }]}>
           <Select
             mode="multiple"
             placeholder="Select designers"
             options={designers?.map((designer) => ({ label: designer.DesignerName, value: designer.Id }))}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item name="MaterialsId" label="Materials" rules={[{ required: true }]}>
           <Select
@@ -170,28 +186,33 @@ const CreateProduct: React.FC = () => {
               options={colors?.map((color) => ({ label: color.ColorName, value: color.Id })) || []}
               onChange={(value) => setCurrentVariant({ ...currentVariant, colorId: value })}
             />
-            <Input
-              placeholder="Furniture Length"
+            <Select
+              placeholder="Select Size"
+              options={sizes?.map((size) => ({ label: size.SizeName, value: size.Id })) || []}
+              onChange={(value) => setCurrentVariant({ ...currentVariant, sizeId: value })}
+            />
+            {/* <Input
+              placeholder="Clothes Length"
               type="number"
               onChange={(e) => setCurrentVariant({ ...currentVariant, length: parseFloat(e.target.value) })}
             />
             <Input
-              placeholder="Furniture Width"
+              placeholder="Clothes Width"
               type="number"
               onChange={(e) => setCurrentVariant({ ...currentVariant, width: parseFloat(e.target.value) })}
             />
             <Input
-              placeholder="Furniture Height"
+              placeholder="Human Height"
               type="number"
               onChange={(e) => setCurrentVariant({ ...currentVariant, height: parseFloat(e.target.value) })}
-            />
-            <Input
+            /> */}
+            {/* <Input
               placeholder="Quantity"
               type="number"
               onChange={(e) => setCurrentVariant({ ...currentVariant, quantity: parseInt(e.target.value, 10) })}
-            />
+            /> */}
             <Input
-              placeholder="Furniture Price"
+              placeholder="Clothes Price"
               type="number"
               onChange={(e) => setCurrentVariant({ ...currentVariant, price: parseFloat(e.target.value) })}
             />
@@ -211,7 +232,7 @@ const CreateProduct: React.FC = () => {
           <Button onClick={handleAddVariant} className="mt-4">Add Variant</Button>
         </div>
 
-        <Table title={() => 'Product Variants'} dataSource={variants} columns={columns} rowKey="colorId" className="mt-4 border border-gray-300 rounded-sm"/>
+        <Table key={'variants'} title={() => 'Product Variants'} dataSource={variants} columns={columns} rowKey="colorId" className="mt-4 border border-gray-300 rounded-sm"/>
 
         <Button
           type="primary"

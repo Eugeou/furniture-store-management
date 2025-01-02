@@ -82,6 +82,7 @@ const ProductList: React.FC = () => {
             title: 'Display price',
             dataIndex: 'DisplayPrice',
             key: 'DisplayPrice',
+            
         },
         {
             title: 'Category',
@@ -109,21 +110,21 @@ const ProductList: React.FC = () => {
                 </Space>
             ),
         },
-        {   
-            title: 'Designers',
-            dataIndex: 'Designers',
-            key: 'Designers',
-            render: (text: string[]) => (
-                <Space size="middle">
-                    {text.map((designer) => (
-                        <Tag color="yellow" key={designer}>
-                            {designer}
-                        </Tag>
-                    ))}
-                </Space>
-            ),
+        // {   
+        //     title: 'Designers',
+        //     dataIndex: 'Designers',
+        //     key: 'Designers',
+        //     render: (text: string[]) => (
+        //         <Space size="middle">
+        //             {text.map((designer) => (
+        //                 <Tag color="yellow" key={designer}>
+        //                     {designer}
+        //                 </Tag>
+        //             ))}
+        //         </Space>
+        //     ),
 
-        },
+        // },
         
         {
             title: 'Actions',
@@ -177,7 +178,7 @@ const ProductList: React.FC = () => {
     return (
         <div className="p-4">
             <div className="flex flex-row space-x-4 justify-end mb-6">
-                <div className="flex w-full justify-start h-10 border border-gray-500 rounded-lg p-2 focus:outline-none hover:border-blue-500 focus:border-transparent shadow-lg">
+                <div className="flex w-full justify-start h-10 border border-gray-500 rounded-lg p-2 focus:outline-none hover:border-green-600 focus:border-transparent shadow-lg">
                     <Search className='text-gray-500 mr-3' />
                     <Input
                         className='w-full border-none focus:outline-none'
@@ -189,6 +190,7 @@ const ProductList: React.FC = () => {
                 <Button
                     className="flex flex-row text-center items-center space-x-1 text-sm h-10 rounded-lg mb-4 shadow-xl"
                     type="primary"
+                    style={{ backgroundColor: "#3b5d50" }}
                     onClick={() => router.push('/product/add-product')}
                     icon={<BookmarkPlus width={18} height={18} />}
                 >
@@ -197,7 +199,8 @@ const ProductList: React.FC = () => {
                 <Button
                     className="flex flex-row text-center items-center space-x-1 text-sm h-10 rounded-lg mb-4 shadow-xl"
                     type="primary"
-                    onClick={() => router.push('/pages/manage-products/products/add-existed-product')}
+                    style={{ backgroundColor: "#3b5d50" }}
+                    onClick={() => toast.info('Add existed product feature is under development')}
                     icon={<BookmarkPlus width={18} height={18} />}
                 >
                     Add Existed Product
@@ -229,7 +232,7 @@ const ProductList: React.FC = () => {
                     <>
                         <div className="flex justify-center items-center w-full"><Image src={selectedProduct.ImageSource ? selectedProduct.ImageSource : '/favicon.png'} width={150} /></div>
 
-                        <h2 className="font-semibold text-lg mt-4 border-b text-indigo-600">Product Information</h2>
+                        <h2 className="font-semibold text-lg mt-4 border-b text-green-700">Product Information</h2>
                         
                         <div className="mt-4">
                             <label className="block text-xs font-semibold mb-2">Product Name</label>
@@ -252,13 +255,13 @@ const ProductList: React.FC = () => {
                         <div className="mt-4">
                             <label className="block text-xs font-semibold mb-2">Category</label>
                             <div className="p-2 border border-gray-700 rounded-lg">
-                                <p className="text-sm">{selectedProduct.CategoryName}</p>
+                                <Tag color='green' className="text-sm">{selectedProduct.CategoryName}</Tag>
                             </div>
                         </div>
                         <div className="mt-4">
                             <label className="block text-xs font-semibold mb-2">Brand</label>
                             <div className="p-2 border border-gray-700 rounded-lg">
-                                <p className="text-sm">{selectedProduct.BrandName}</p>
+                                <Tag color='orange' className="text-sm">{selectedProduct.BrandName}</Tag>
                             </div>
                         </div>
                         <div className="mt-4">
@@ -273,18 +276,18 @@ const ProductList: React.FC = () => {
                                 <Tag color='geekblue' className="text-sm">{selectedProduct.Materials.join(' - ')}</Tag>
                             </div>
                         </div>
-                        <div className="mt-4">
+                        {/* <div className="mt-4">
                             <label className="block text-xs font-semibold mb-2">Designers</label>
                             <div className="p-2 border border-gray-700 rounded-lg">
                                 <Tag color='geekblue' className="text-sm">{selectedProduct.Designers.join(' - ')}</Tag>
                             </div>
-                        </div>
+                        </div> */}
                         
 
-                        <h2 className="font-semibold text-lg mt-8 border-b text-indigo-600">Product Variants</h2>
+                        <h2 className="font-semibold text-lg mt-8 border-b text-green-700">Product Variants</h2>
 
                         <Table
-                            className="mt-4 border border-gray-400 rounded-md shadow-xl"
+                            className="mt-4 border border-gray-200 rounded-md shadow-xl"
                             columns={productItemColumns}
                             dataSource={productItems}
                             pagination={false}

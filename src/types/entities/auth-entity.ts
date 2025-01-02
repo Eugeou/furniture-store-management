@@ -29,6 +29,7 @@ export type UserProps = {
     LockoutEnabled: boolean;
     AccessFailedCount: number;
     SecurityStamp: string;
+    ImageSource?: string;
     
    // password: string;
 }

@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
 
   // Nếu người dùng chưa đăng nhập và cố truy cập route bảo vệ, chuyển hướng sang login
   if (!token && isProtectedRoute) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    //return NextResponse.redirect(new URL("/login", request.url));
   }
 
   return NextResponse.next();

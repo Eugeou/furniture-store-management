@@ -14,7 +14,7 @@ export const createProduct = async (product: Product): Promise<void> => {
   data.append('BrandId', product.BrandId);
   data.append('CategoryId', product.CategoryId);
 
-  product?.DesignersId.forEach((id, index) => data.append(`DesignersId[${index}]`, id));
+  //product?.DesignersId.forEach((id, index) => data.append(`DesignersId[${index}]`, id));
   product?.MaterialsId.forEach((id, index) => data.append(`MaterialsId[${index}]`, id));
 
   if (product.Discount) {
@@ -23,10 +23,11 @@ export const createProduct = async (product: Product): Promise<void> => {
 
   product.ProductVariants?.forEach((variant, index) => {
     data.append(`ProductVariants[${index}].colorId`, variant.colorId);
-    data.append(`ProductVariants[${index}].length`, variant.length.toString());
-    data.append(`ProductVariants[${index}].width`, variant.width.toString());
-    data.append(`ProductVariants[${index}].height`, variant.height.toString());
-    data.append(`ProductVariants[${index}].quantity`, variant.quantity.toString());
+    data.append(`ProductVariants[${index}].sizeId`, variant.sizeId);
+    // data.append(`ProductVariants[${index}].length`, variant.length.toString());
+    // data.append(`ProductVariants[${index}].width`, variant.width.toString());
+    // data.append(`ProductVariants[${index}].height`, variant.height.toString());
+    // data.append(`ProductVariants[${index}].quantity`, variant.quantity.toString());
     data.append(`ProductVariants[${index}].price`, variant.price.toString());
     variant.images?.forEach((image) =>
       data.append(`ProductVariants[${index}].Images`, image)
@@ -73,7 +74,7 @@ export const UpdateProduct = async (id: string, product: Product): Promise<void>
   data.append('BrandId', product.BrandId);
   data.append('CategoryId', product.CategoryId);
 
-  product?.DesignersId.forEach((id, index) => data.append(`DesignersId[${index}]`, id));
+  //product?.DesignersId.forEach((id, index) => data.append(`DesignersId[${index}]`, id));
   product?.MaterialsId.forEach((id, index) => data.append(`MaterialsId[${index}]`, id));
 
   if (product.Discount) {
@@ -82,10 +83,11 @@ export const UpdateProduct = async (id: string, product: Product): Promise<void>
 
   product.ProductVariants?.forEach((variant, index) => {
     data.append(`ProductVariants[${index}].colorId`, variant.colorId);
-    data.append(`ProductVariants[${index}].length`, variant.length.toString());
-    data.append(`ProductVariants[${index}].width`, variant.width.toString());
-    data.append(`ProductVariants[${index}].height`, variant.height.toString());
-    data.append(`ProductVariants[${index}].quantity`, variant.quantity.toString());
+    data.append(`ProductVariants[${index}].sizeId`, variant.sizeId);
+    // data.append(`ProductVariants[${index}].length`, variant.length.toString());
+    // data.append(`ProductVariants[${index}].width`, variant.width.toString());
+    // data.append(`ProductVariants[${index}].height`, variant.height.toString());
+    // data.append(`ProductVariants[${index}].quantity`, variant.quantity.toString());
     data.append(`ProductVariants[${index}].price`, variant.price.toString());
     variant.images?.forEach((image) =>
       data.append(`ProductVariants[${index}].Images`, image)

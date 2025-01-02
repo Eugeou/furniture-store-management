@@ -117,7 +117,7 @@ const ManageCoupon: React.FC = () => {
         title: 'Image',
         dataIndex: 'ImageSource',
         key: 'ImageSource',
-            render: (image: string) => <Image src={image} alt="coupon" width={40}/>,
+            render: (image: string) => <Image src={image || "/faq.png"} alt="coupon" width={40}/>,
         },
         {
         title: 'Description',
@@ -179,7 +179,7 @@ const ManageCoupon: React.FC = () => {
             size="middle"
             prefix={<Search />}
             />
-            <Button className="flex flex-row text-center items-center space-x-1 h-10 rounded-lg mb-6 shadow-xl"
+            <Button className="flex flex-row text-center items-center space-x-1 h-10 rounded-lg mb-6 shadow-xl" style={{backgroundColor: '#FFA500'}}
             type="primary" icon={<TicketPlus />} onClick={() => setIsAddDrawerVisible(true)}>Add New Coupon</Button>
         </div> 
         

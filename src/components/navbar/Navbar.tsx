@@ -4,31 +4,50 @@ import { Button, Dropdown, Menu, Modal, Avatar, notification } from 'antd';
 import { UserOutlined, SettingOutlined, LogoutOutlined, QuestionCircleOutlined, DashboardOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
-import { logout } from '@/services/auth-service';
+import { logout, GetMe } from '@/services/auth-service';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
+import { UserProps } from '@/types/entities/auth-entity';
 
 
 
 const Navbar: React.FC = () => {
-    //const [user, setUser] = useState<UserProps | null>(null);
+    const [user, setUser] = useState<UserProps | null>(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     //const [searchResults, setSearchResults] = useState<string[]>([]);
     const [revenue, setRevenue] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { data: session } = useSession();
-    const user = session?.user;
+    const userId = localStorage.getItem('userId');
+    // console.log('userId', userId);
+    // console.log("Access token", localStorage.getItem('accessToken'));
+
+    // const { data: session } = useSession();
+    // const user = session?.user;
     //console.log('userId', user?.id);
     //console.log('role', user?.user.Role);
     
-    useEffect(() => {
-        localStorage.setItem('role', user?.user.Role || '');
-    }, [user]);
-     console.log('role: ', localStorage.getItem('role'));
+    // useEffect(() => {
+    //     localStorage.setItem('role', user?.user.Role || '');
+    // }, [user]);
+    //  console.log('role: ', localStorage.getItem('role'));
 
-    
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (userId) {
+                try {
+                    const response = await GetMe(userId);
+                    setUser(response);
+                    console.log('User: ', response);
+                } catch (error) {
+                    notification.error({ message: 'Failed to fetch user' + error });
+                }
+            }
+        };
+
+        fetchUser();
+    }, [userId]);
 
     const handleRevenue = () => {
         let storedValue: string | null = localStorage.getItem('revenue');
@@ -37,7 +56,7 @@ const Navbar: React.FC = () => {
     }
 
     const handleLogout = async () => {
-        const userId = user?.id;
+        
         if (userId) {
             setLoading(true);
             try {
@@ -70,13 +89,13 @@ const Navbar: React.FC = () => {
     const userMenu = (
         <Menu>
             <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
-                <span className='text-green-800'>{user?.user.FullName}</span>
+                <span className='text-green-800'>{user?.FullName}</span>
             </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
                 <Link href="/profile">Your Profile</Link>
             </Menu.Item>
             <Menu.Item key="settings" icon={<SettingOutlined />}>
-                <Link href={`/setting/${user?.id}`}>Settings</Link>
+                <Link href={`/setting/${user?.Id}`}>Settings</Link>
             </Menu.Item>
             <Menu.Item key="help" icon={<QuestionCircleOutlined />}>
                 <Link href="/help">Help</Link>
@@ -120,7 +139,7 @@ const Navbar: React.FC = () => {
             </Dropdown>
             <Dropdown className=' mr-52 border-2 border-gray-500 bg-white rounded-full justify-start items-center w-20 ' overlay={userMenu} placement="bottomLeft" arrow >
                 <div className="flex items-center cursor-pointer">
-                    <Avatar src={user?.user.ImageSource || "/nextjs-logo.jpg"} />
+                    <Avatar src={user?.ImageSource || "/nextjs-logo.jpg"} />
                     {/* <span className="ml-2 text-nowrap text-yellow-800 font-semibold">{user?.user.FullName}</span> */}
                 </div>
             </Dropdown>

@@ -138,6 +138,11 @@ const ImportProducts: React.FC = () => {
     }
   };
 
+  const formatPrice = (price : number) => {
+    //const firstPrice = price.split(" - ")[0];
+    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(price));
+  };
+
   // Define columns for the import items table
   const importColumns = [
     {
@@ -149,7 +154,7 @@ const ImportProducts: React.FC = () => {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
-      render: (price: number) => `$${price.toFixed(2)}`,
+      render: (price: number) => `${formatPrice(price)}`,
     },
     {
       title: 'Quantity',
@@ -160,7 +165,7 @@ const ImportProducts: React.FC = () => {
       title: 'Total',
       dataIndex: 'total',
       key: 'total',
-      render: (total: number) => `$${total.toFixed(2)}`,
+      render: (total: number) => `${formatPrice(total)}`,
     },
     {
       title: 'Action',
@@ -220,11 +225,11 @@ const ImportProducts: React.FC = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h3 className="text-3xl font-semibold mb-6">Product information</h3>
+      <h3 className="text-xl font-semibold text-green-900 mb-6">Product information</h3>
 
       {/* Product Selection */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">Select a product</h3>
+        <h3 className="text-lg font-semibold text-green-700 mb-2">Select a product</h3>
         <Select
           showSearch
           placeholder="Select a product"
@@ -258,16 +263,16 @@ const ImportProducts: React.FC = () => {
       {/* Variant Selection and Input */}
       {selectedVariant && (
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">Select Variant</h3>
+          <h3 className="text-lg font-semibold text-green-700 mb-2">Select Variant</h3>
           <Select
             placeholder="Select a variant"
             onChange={handleVariantChange}
-            className="w-full mb-4"
+            className="w-full mb-6"
             value={selectedVariant?.Id}
           >
             {selectedProduct?.ProductVariants.map((variant) => (
               <Option key={variant.Id} value={variant.Id}>
-                <strong>Color: </strong>{variant.ColorName} - <strong>Size: </strong>{variant.DisplayDimension} - <strong>Quantity: </strong>{variant.Quantity}
+                <strong>Color: </strong>{variant.ColorName} - <strong>Size: </strong>{variant.SizeName} - <strong>Quantity: </strong>{variant.Quantity} - <strong>Sold price: </strong>{formatPrice(variant.Price)}
               </Option>
             ))}
           </Select>
@@ -287,11 +292,11 @@ const ImportProducts: React.FC = () => {
               ]}
             >
               <InputNumber
-                placeholder="Enter price"
+                placeholder="Enter price (VNĐ)"
                 className="w-full"
                 min={0}
                 max={selectedVariant.Price - 1}
-                formatter={(value) => `VNĐ ${value}`}
+                //formatter={(value) => `VNĐ ${value}`}
                 parser={(value: any) => value.replace(/\$\s?|(,*)/g, '')}
               />
             </Form.Item>
@@ -313,7 +318,7 @@ const ImportProducts: React.FC = () => {
                 placeholder="Enter quantity"
                 className="w-full"
                 min={1}
-                max={selectedVariant.Quantity}
+                //max={selectedVariant.Quantity}
               />
             </Form.Item>
 
@@ -340,7 +345,7 @@ const ImportProducts: React.FC = () => {
       {/* Import Items Table */}
       {importItems.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Import List</h2>
+          <h2 className="text-xl text-green-700 font-semibold mb-2">Import List</h2>
           <Table
             dataSource={importItems}
             columns={importColumns}
