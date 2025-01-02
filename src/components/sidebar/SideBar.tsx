@@ -162,10 +162,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                   <Blocks className="mr-2" />
                   <Link href="/material">Materials</Link>
                 </li>
-                {/* <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
+                <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <WandSparkles className="mr-2" />
-                  <Link href="/designer">Designer</Link>
-                </li> */}
+                  <Link href="/size">Size</Link>
+                </li>
                 <li className="p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-green-900">
                   <PackageOpen className="mr-2" />
                   <Link href="/product/list-product">Products list</Link>
@@ -259,7 +259,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               
               <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                 <UserPlus className="mr-2" />
-                <Link href="/pages/manage-customers/add-customer">Add Customer</Link>
+                <Link href="/customer/add-customer">Add Customer</Link>
               </li>
             </ul>
             </>
@@ -286,12 +286,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
               >
                 <li className=" p-2 mb-2 mt-2 left-3 rounded-lg hover:bg-green-800 hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-amber-800">
                   <BookUser className="mr-2 rounded-md" />
-                  <Link href="/Staff/list-Staff">Staffs List</Link>
+                  <Link href="/staff/list-staff">Staffs List</Link>
                 </li>
                 
                 <li className=" p-2  rounded-lg hover:bg-green-800 group hover:text-white font-semibold flex items-center transition duration-500 ease-out focus:outline-none active:bg-slate-900">
                   <UserPlus className="mr-2" />
-                  <Link href="/Staff/add-Staff">Add Staff</Link>
+                  <Link href="/staff/add-staff">Add Staff</Link>
                 </li>
               </ul>
             </>

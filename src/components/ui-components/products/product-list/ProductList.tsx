@@ -156,12 +156,12 @@ const ProductList: React.FC = () => {
             title: 'Color',
             dataIndex: 'ColorName',
             key: 'ColorName',
-            render: (text: string) => <Tag color={text}>{text}</Tag>,
+            // render: (text: string) => <Tag className='text-gray-600' color={text}>{text}</Tag>,
         },
         {
-            title: 'Display dimension',
-            dataIndex: 'DisplayDimension',
-            key: 'DisplayDimension',
+            title: 'Size',
+            dataIndex: 'SizeName',
+            key: 'SizeName',
         },
         {
             title: 'Quantity',
@@ -169,7 +169,7 @@ const ProductList: React.FC = () => {
             key: 'Quantity',
         },
         {
-            title: 'Price',
+            title: 'Unit Price',
             dataIndex: 'Price',
             key: 'Price',
         },

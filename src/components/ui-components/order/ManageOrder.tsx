@@ -171,6 +171,8 @@ const ManageOrders: React.FC = () => {
             <Option value={"Paid"}>Paid</Option>
             <Option value={"Confirmed"}>Confirmed</Option>
             <Option value={"Canceled"}>Canceled</Option>
+            <Option value={"Delivering"}>Delivering</Option>
+            <Option value={"Refund"}>Refund</Option>
             <Option value={"Completed"}>Completed</Option>
           </Select>
         </div>

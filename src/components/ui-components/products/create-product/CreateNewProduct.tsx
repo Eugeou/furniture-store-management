@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import useSWR from 'swr';
-import { Upload, Button, Input, Select, Table, Form, Tag } from 'antd';
+import { Upload, Button, Input, Select, Table, Form, Tag, Image } from 'antd';
 import { toast } from 'react-toastify';
 import { createProduct } from '@/services/product-service';
 import type { Product, ProductVariant } from '@/types/entities/product-entity';
@@ -122,7 +122,7 @@ const CreateProduct: React.FC = () => {
 
   return (
     <div className="p-4">
-        <h2 className="font-bold mb-4 border-b text-indigo-600 text-lg">Product information</h2>
+        <h2 className="font-bold mb-4 border-b text-green-700 text-lg">Product information</h2>
       <Form layout="vertical" form={form} className='font-semibold'>
         <Form.Item name="ProductName" label="Product Name" rules={[{ required: true }]}>
           <Input placeholder="Enter product name" />
@@ -141,11 +141,11 @@ const CreateProduct: React.FC = () => {
         </Form.Item>
 
         <Form.Item name="BrandId" label="Brand" rules={[{ required: true }]}>
-          <Select placeholder="Select a brand" options={brands?.map((brand) => ({ label: brand.BrandName, value: brand.Id }))} />
+          <Select placeholder="Select a brand" options={brands?.map((brand) => ({ label: <div className='flex items-center space-x-4 '><Image src={brand.ImageSource || 'faq.png'} width={20} height={20} alt={brand.BrandName}></Image> <p>{brand.BrandName}</p></div>, value: brand.Id }))} />
         </Form.Item>
 
         <Form.Item name="CategoryId" label="Category" rules={[{ required: true }]}>
-          <Select placeholder="Select a category" options={categories?.map((category) => ({ label: category.CategoryName, value: category.Id }))} />
+          <Select placeholder="Select a category" options={categories?.map((category) => ({ label: <div className='flex items-center space-x-4 '><Image src={category.ImageSource || 'faq.png'} width={20} height={20} alt={category.CategoryName}></Image> <p>{category.CategoryName}</p></div>, value: category.Id }))} />
         </Form.Item>
 
         {/* <Form.Item name="DesignersId" label="Designers" rules={[{ required: true }]}>
@@ -160,7 +160,7 @@ const CreateProduct: React.FC = () => {
           <Select
             mode="multiple"
             placeholder="Select materials"
-            options={materials?.map((material) => ({ label: material.MaterialName, value: material.Id }))}
+            options={materials?.map((material) => ({ label: <div className='flex items-center space-x-4 '><Image src={material.ImageSource || 'faq.png'} width={20} height={20} alt={material.MaterialName}></Image> <p>{material.MaterialName}</p></div>, value: material.Id }))}
           />
         </Form.Item>
 
@@ -178,9 +178,9 @@ const CreateProduct: React.FC = () => {
         </Form.Item>
 
         <div className="border-t mt-4 pt-4">
-          <h2 className="font-bold mb-4 border-b text-indigo-600 text-lg">Product Variants</h2>
+          <h2 className="font-bold mb-4 border-b text-green-700 text-lg">Product Variants</h2>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <Select
               placeholder="Select Color"
               options={colors?.map((color) => ({ label: color.ColorName, value: color.Id })) || []}

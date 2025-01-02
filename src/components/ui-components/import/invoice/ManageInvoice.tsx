@@ -35,6 +35,11 @@ const ManageInvoice: React.FC = () => {
     setProductNameFilter(productName);
   };
 
+  const formatPrice = (price : number) => {
+    //const firstPrice = price.split(" - ")[0];
+    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(price));
+  };
+
   /**
    * Define columns for the Ant Design Table
    */
@@ -44,7 +49,7 @@ const ManageInvoice: React.FC = () => {
       dataIndex: 'Total',
       key: 'Total',
       sorter: (a, b) => a.Total - b.Total,
-      render: (total: number) => `${total.toFixed(2)}đ`,
+      render: (total: number) => `${formatPrice(total)}`,
     },
     {
       title: 'Product Names',
@@ -77,7 +82,7 @@ const ManageInvoice: React.FC = () => {
       },
     },
     {
-      title: 'Price',
+      title: 'Unit Price',
       key: 'Price',
       dataIndex: 'ImportItemResponse',
       render: (items: ImportItemResponse[]) => {
@@ -86,7 +91,7 @@ const ManageInvoice: React.FC = () => {
         }
         // Sum up the prices (assuming each item has a distinct price)
         const totalPrice = items.reduce((sum, item) => sum + item.Price, 0);
-        return <span>{totalPrice.toFixed(2)}đ</span>;
+        return <span>{formatPrice(totalPrice)}</span>;
       },
     },
     {
@@ -99,7 +104,7 @@ const ManageInvoice: React.FC = () => {
         }
         // Sum up the total amounts of all items in the import
         const importTotal = items.reduce((sum, item) => sum + item.Total, 0);
-        return <span>{importTotal.toFixed(2)}đ</span>;
+        return <span>{formatPrice(importTotal)}</span>;
       },
     },
   ];
@@ -119,7 +124,7 @@ const ManageInvoice: React.FC = () => {
 
     if (productNameFilter !== null) {
       isProductNameMatch = importItem.ImportItemResponse.some(
-        (item) => item.ProductName.toLowerCase() === productNameFilter.toLowerCase()
+        (item) => item?.ProductName.toLowerCase() === productNameFilter?.toLowerCase()
       );
     }
 
@@ -144,6 +149,8 @@ const ManageInvoice: React.FC = () => {
       </div>
     );
   }
+
+  
 
   return (
     <div className="container mx-auto p-6">
@@ -238,13 +245,13 @@ const ManageInvoice: React.FC = () => {
                       title: 'Price',
                       dataIndex: 'Price',
                       key: 'Price',
-                      render: (price: number) => `${price.toFixed(2)}đ`,
+                      render: (price: number) => `${formatPrice(price)}`,
                     },
                     {
                       title: 'Total',
                       dataIndex: 'Total',
                       key: 'Total',
-                      render: (total: number) => `${total.toFixed(2)}đ`,
+                      render: (total: number) => `${formatPrice(total)}`,
                     },
                   ]}
                   pagination={false}

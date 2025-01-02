@@ -2,7 +2,7 @@ export type Category = {
     Id: string;
     CategoryName: string;
     Description: string;
-    Image: string;
+    ImageSource: string;
     FurnitureTypeId: string;
 };
 
