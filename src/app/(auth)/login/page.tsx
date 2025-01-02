@@ -9,7 +9,7 @@ import AppLoading from '@/components/shared/app-loading/AppLoading';
 import { StoreLogin } from '@/types/entities/auth-entity'
 
 import { Col, Form, Input, Row, Typography, Button } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 // import { useRouter } from 'next/navigation'
 import {motion} from 'framer-motion'
@@ -18,51 +18,54 @@ import { toast } from 'react-toastify';
 // import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/types/redux/redux';
+import { useAuth } from '@/hooks/useAuth';
+import { selectAuth } from '@/redux/slices/auth.slice';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const LoginPage: React.FC = () => {
   const navigate = useRouter().push;
-  // const { onLogin, isLoading } = useAuth()
+  const { onLogin, isLoading } = useAuth()
 
-  // const [form] = Form.useForm()
-  // const handleSubmit = async (values: StoreLogin) => {
-  //   await onLogin(values)
-  //   console.log('values: ', values , 'isLoading: ', isLoading)
-  // }
-  // const { user } = useAppSelector(selectAuth)
-  // const navigate = useRouter().push
-//   useEffect(() => {
-//     if (user) navigate('/brand')
-//   }, [user])
-
-  const { data: session } = useSession();
-  const user = session?.user;
-  const { onLogin, isLoading} = useSessionAuth();
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   const handleSubmit = async (values: StoreLogin) => {
-    try {
-      const result = await onLogin(values);
-      console.log('result: ', result);
-      console.log('user: ', user);
-      if (user?.user.Role) {
-        localStorage.setItem('role', user.user.Role);
-      }
-      
-      toast.success("Login successfully");
-      // if (user?.user.Role === 'Owner') {
-      //   navigate('/dashboard');
+    await onLogin(values)
+    console.log('values: ', values , 'isLoading: ', isLoading)
+  }
+  const { user } = useAppSelector(selectAuth)
+  //const navigate = useRouter().push
+  // useEffect(() => {
+  //   if (user) navigate('/report/daily-report')
+  // }, [user])
 
-      // }
-      // else if (user?.user.Role === 'Staff') {
-      //   navigate('/customer');
-      // }
-      navigate('/report/daily-report');
-    } catch (error) {
-      toast.error("Internal error during login " + error);
-    }
+  // const { data: session } = useSession();
+  // const user = session?.user;
+  // const { onLogin, isLoading} = useSessionAuth();
+  // const [form] = Form.useForm();
+  // const handleSubmit = async (values: StoreLogin) => {
+  //   try {
+  //     const result = await onLogin(values);
+  //     console.log('result: ', result);
+  //     console.log('user: ', user);
+  //     if (user?.user.Role) {
+  //       localStorage.setItem('role', user.user.Role);
+  //     }
+      
+  //     toast.success("Login successfully");
+  //     // if (user?.user.Role === 'Owner') {
+  //     //   navigate('/dashboard');
+
+  //     // }
+  //     // else if (user?.user.Role === 'Staff') {
+  //     //   navigate('/customer');
+  //     // }
+  //     navigate('/report/daily-report');
+  //   } catch (error) {
+  //     toast.error("Internal error during login " + error);
+  //   }
     
-  };
+  // };
   
   console.log('role: ', localStorage.getItem('role'));
 
