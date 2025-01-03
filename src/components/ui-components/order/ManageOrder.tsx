@@ -4,6 +4,7 @@ import { Table, Button, Drawer, Select, message, Spin } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { GetAllOrders, ChangeOrderStatus } from '@/services/order-service'; // Adjust the import path accordingly
 import { OrderEntity } from '@/types/entities/order-entity';
+import { CreateNewNotification } from '@/services/notification-service';
 import useSWR from 'swr';
 
 const { Option } = Select;
@@ -44,15 +45,28 @@ const ManageOrders: React.FC = () => {
     setSelectedOrder(null);
   };
 
+  const formatPrice = (price : number) => {
+    //const firstPrice = price.split(" - ")[0];
+    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(price));
+  };
+
   /**
    * Handle changing the order status
    * @param orderId - ID of the order
    * @param status - New status value
    */
-  const handleChangeStatus = async (orderId: string, status: string) => {
+  const handleChangeStatus = async (orderId: string, status: string, userId: string) => {
     setStatusChanging(true);
     try {
       await ChangeOrderStatus(orderId, status);
+
+      await CreateNewNotification({
+        content: `Your order has been updated to ${status}.`,
+        title: 'Order Status Update',
+        orderId: orderId,
+        userId: userId,
+      });
+
       console.log('Status:', status);
       message.success('Order status updated successfully!');
       mutate(); // Refresh the orders data
@@ -149,7 +163,7 @@ const ManageOrders: React.FC = () => {
       dataIndex: 'Total',
       key: 'Total',
       sorter: (a, b) => a.Total - b.Total,
-      render: (total: number) => `$${total.toFixed(2)}`,
+      render: (total: number) => `${formatPrice(total)}`,
     },
     {
       title: 'Action',
@@ -164,16 +178,16 @@ const ManageOrders: React.FC = () => {
           <Select
             style={{ width: 120 }}
             placeholder="Change Status"
-            onChange={(value: string) => handleChangeStatus(record.Id, value)}
+            onChange={(value: string) => handleChangeStatus(record.Id, value, record.UserId)}
             loading={statusChanging}
           >
-            <Option value={"Pending"}>Pending</Option>
-            <Option value={"Paid"}>Paid</Option>
-            <Option value={"Confirmed"}>Confirmed</Option>
-            <Option value={"Canceled"}>Canceled</Option>
-            <Option value={"Delivering"}>Delivering</Option>
-            <Option value={"Refund"}>Refund</Option>
-            <Option value={"Completed"}>Completed</Option>
+            <Option value={0}>Pending</Option>
+            <Option value={1}>Paid</Option>
+            <Option value={2}>Confirmed</Option>
+            <Option value={3}>Canceled</Option>
+            <Option value={5}>Delivering</Option>
+            <Option value={8}>Refund</Option>
+            <Option value={6}>Completed</Option>
           </Select>
         </div>
       ),
